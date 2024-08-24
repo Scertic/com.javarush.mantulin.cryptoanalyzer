@@ -1,9 +1,6 @@
 package org.example;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Cipher {
     private final char[] alphabet;
@@ -19,7 +16,7 @@ public class Cipher {
     }
 
     public String encrypt(String text, int shift) {
-        StringBuilder result = new StringBuilder("");
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
             if (alphabetSet.containsKey(text.toLowerCase().charAt(i))) {
                 result.append(alphabet[(alphabetSet.get(text.toLowerCase().charAt(i)) + shift) % alphabet.length]);
@@ -28,7 +25,7 @@ public class Cipher {
         return result.toString();
     }
     public String decrypt(String encryptedText, int shift) {
-        StringBuilder result = new StringBuilder("");
+        StringBuilder result = new StringBuilder();
         int findSymbol;
         for (int i = 0; i < encryptedText.length(); i++) {
             findSymbol = alphabetSet.get(encryptedText.toLowerCase().charAt(i));
