@@ -39,7 +39,7 @@ public class Cipher {
                 result.append(alphabet[Math.abs(findSymbol - shift) % alphabet.length]);
             }
         }
-        return result;
+        return result.toString();
     }
 
     private HashMap<Character, Integer> convertAlphabet(char[] alphabet) {
