@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 
 public class FileManager {
     private BufferedReader bufferedReader;
@@ -13,12 +14,11 @@ public class FileManager {
         if (bufferedReader == null) {
             bufferedReader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
         }
-//        if (!bufferedReader.ready()) {
-//            bufferedReader.close();
-//        }
+        //TODO закрытие потока?
         return bufferedReader.readLine();
     }
-    public void writeFile(String content, String filePath) {
-        //TODO Логика записи файла
+    public void writeFile(String content, String filePath) throws IOException {
+        Path path = Path.of(filePath);
+        Files.writeString(path, content, StandardOpenOption.APPEND);
     }
 }
