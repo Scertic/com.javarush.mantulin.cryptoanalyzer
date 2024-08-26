@@ -12,7 +12,7 @@ import java.nio.file.StandardOpenOption;
 public class FileManager {
     private BufferedReader bufferedReader;
 
-    public String readFile(String filePath) throws IOException {
+    public String readFile(String filePath){
         try {
             Path path = Path.of(filePath);
             if (bufferedReader == null) {
@@ -25,7 +25,7 @@ public class FileManager {
         }
     }
 
-    public void writeFile(String content, String filePath) throws IOException {
+    public void writeFile(String content, String filePath){
         try {
             Path path = Path.of(filePath);
             Files.writeString(path, content, StandardOpenOption.APPEND);
