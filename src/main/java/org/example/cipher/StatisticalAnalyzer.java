@@ -1,4 +1,4 @@
-package org.example;
+package org.example.cipher;
 
 public class StatisticalAnalyzer {
     public int findMostLikelyShift(String encryptedText,

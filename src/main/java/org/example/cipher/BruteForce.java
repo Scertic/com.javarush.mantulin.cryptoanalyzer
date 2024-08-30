@@ -1,4 +1,4 @@
-package org.example;
+package org.example.cipher;
 
 import org.example.ecxeptions.CaesarsCipherException;
 
