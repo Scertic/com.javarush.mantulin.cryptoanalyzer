@@ -1,6 +1,5 @@
 package org.example.cipher;
 
-import org.example.ecxeptions.CaesarsCipherException;
 
 public class BruteForce {
     public String decryptByBruteForce(String encryptedText, char[] alphabet) {

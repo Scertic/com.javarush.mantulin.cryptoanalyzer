@@ -6,11 +6,11 @@ import java.util.HashMap;
 
 public class Cipher {
     private final char[] alphabet;
-    private final HashMap<Character, Integer> alphabetSet;
+    private final HashMap<Character, Integer> alphabetMap;
 
     public Cipher(char[] alphabet) {
         this.alphabet = alphabet;
-        this.alphabetSet = convertAlphabet(alphabet);
+        this.alphabetMap = convertAlphabet(alphabet);
     }
 
     public Cipher() {
@@ -20,30 +20,23 @@ public class Cipher {
     }
 
     public String encrypt(String text, int shift) {
+        return cryptProcess(text, shift);
+    }
+
+    public String decrypt(String encryptedText, int shift) {
+       return cryptProcess(encryptedText, -shift);
+    }
+
+    private String cryptProcess(String text, int shift) {
         try {
             StringBuilder result = new StringBuilder();
             String textLC = text.toLowerCase();
             for (int i = 0; i < text.length(); i++) {
-                if (alphabetSet.containsKey(textLC.charAt(i))) {
-                    result.append(alphabet[(alphabetSet.get(textLC.charAt(i)) + shift + alphabet.length) % alphabet.length]);
-                }
-            }
-            return result.toString();
-        } catch (Exception e) {
-            throw new CaesarsCipherException(e.getMessage());
-        }
-    }
-
-    public String decrypt(String encryptedText, int shift) {
-        try {
-            StringBuilder result = new StringBuilder();
-            String textLC = encryptedText.toLowerCase();
-            for (int i = 0; i < encryptedText.length(); i++) {
-                if (alphabetSet.get(textLC.charAt(i)) == -1) {
+                if (alphabetMap.get(textLC.charAt(i)) == -1) {
                     throw new CaesarsCipherException("Wrong text.");
                 }
-                if (alphabetSet.containsKey(textLC.charAt(i))) {
-                    result.append(alphabet[(alphabetSet.get(textLC.charAt(i)) + shift + alphabet.length) % alphabet.length]);
+                if (alphabetMap.containsKey(textLC.charAt(i))) {
+                    result.append(alphabet[(alphabetMap.get(textLC.charAt(i)) + shift + alphabet.length) % alphabet.length]);
                 }
             }
             return result.toString();
