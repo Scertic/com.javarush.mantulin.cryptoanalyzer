@@ -1,10 +1,10 @@
-package org.example.crypter;
+package org.example.cipher;
 
 import org.example.cipher.CaesarCipher;
 import org.example.files.FileManager;
 import org.example.validation.Validator;
 
-public class Cryptographer {
+public class CaesarCoder {
     private final Validator validator = new Validator();
     private final FileManager fileManager = new FileManager();
     private final CaesarCipher cipher;
@@ -14,7 +14,7 @@ public class Cryptographer {
 
     int key;
 
-    public Cryptographer(String operation, String fileSrcPath, String fileDstPath, int key) {
+    public CaesarCoder(String operation, String fileSrcPath, String fileDstPath, int key) {
         this.operation = operation;
         this.fileSrcPath = fileSrcPath;
         this.fileDstPath = fileDstPath;

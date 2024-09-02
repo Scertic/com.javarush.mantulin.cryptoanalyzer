@@ -1,7 +1,7 @@
 package org.example;
 
 import org.example.cipher.BruteForce;
-import org.example.crypter.Cryptographer;
+import org.example.cipher.CaesarCoder;
 import org.example.ecxeptions.CaesarsCipherException;
 
 import java.util.Scanner;
@@ -27,7 +27,7 @@ public class ConsoleApp {
                     String fileDstPath = scanner.nextLine();
                     System.out.print("Введите ключ: ");
                     int key = scanner.nextInt();
-                    new Cryptographer(command, fileSrcPath,fileDstPath, key).start();
+                    new CaesarCoder(command, fileSrcPath,fileDstPath, key).start();
                     break;
                 }
                 case 2: {
