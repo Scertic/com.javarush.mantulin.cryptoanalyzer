@@ -9,10 +9,7 @@ import java.nio.file.Path;
 
 public class Validator {
     public boolean isValidKey(int key, Alphabet alphabet) {
-        if (key >= 0 && key <= alphabet.getSize()) {
-            return true;
-        }
-        return false;
+        return key >= 0 && key <= alphabet.getSize();
     }
 
     public boolean isFileExists(String filePath) {
@@ -37,8 +34,7 @@ public class Validator {
 
     public Path validatePath(String filePath) {
         try {
-            Path path = Path.of(filePath);
-            return path;
+            return Path.of(filePath);
         } catch (SecurityException | InvalidPathException e) {
             throw new CaesarsCipherException(e.getMessage(), e);
         }

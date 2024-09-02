@@ -7,7 +7,7 @@ import org.example.validation.Validator;
 public class Cryptographer {
     private final Validator validator = new Validator();
     private final FileManager fileManager = new FileManager();
-    private CaesarCipher cipher;
+    private final CaesarCipher cipher;
     private final String operation;
     private final String fileSrcPath;
     private final String fileDstPath;

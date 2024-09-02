@@ -3,11 +3,10 @@ package org.example.cipher;
 import org.example.alphabet.Alphabet;
 import org.example.ecxeptions.CaesarsCipherException;
 
-import java.util.HashMap;
 
 public class CaesarCipher {
 
-    private Alphabet alphabet;
+    private final Alphabet alphabet;
 
     public CaesarCipher(Alphabet alphabet) {
         this.alphabet = alphabet;
