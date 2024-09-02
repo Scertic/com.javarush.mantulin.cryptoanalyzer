@@ -9,7 +9,7 @@ import java.nio.file.Path;
 
 public class Validator {
     public boolean isValidKey(int key, Alphabet alphabet) {
-        if (key >= 0 && key < alphabet.getSize()) {
+        if (key >= 0 && key <= alphabet.getSize()) {
             return true;
         }
         return false;

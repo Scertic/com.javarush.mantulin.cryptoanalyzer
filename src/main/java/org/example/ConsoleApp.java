@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.cipher.BruteForce;
 import org.example.crypter.Cryptographer;
 import org.example.ecxeptions.CaesarsCipherException;
 
@@ -38,7 +39,7 @@ public class ConsoleApp {
                     String fileDstPath = scanner.nextLine();
                     System.out.print("Введите полный путь до файла примера текста: ");
                     String representativeText = scanner.nextLine();
-                    new Cryptographer("BF", fileSrcPath,fileDstPath, representativeText).start();
+                    new BruteForce(fileSrcPath,fileDstPath, representativeText).start();
                     break;
                 }
                 case 3: {
