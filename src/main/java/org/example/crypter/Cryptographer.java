@@ -118,7 +118,7 @@ public class Cryptographer {
                     if (line == null) {
                         break;
                     }
-                    setDec.addAll(Arrays.stream(bruteForce.decryptByBruteForce(line).toLowerCase().split(" ")).toList());
+                    setDec.addAll(Arrays.stream(bruteForce.decryptByBruteForce(line).split(" ")).toList());
                     Iterator<String> it = setDec.iterator();
                     while (it.hasNext()) {
                         if ((it.next()).length() < 4) {
