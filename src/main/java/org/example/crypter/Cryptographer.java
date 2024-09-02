@@ -96,7 +96,7 @@ public class Cryptographer {
                 setRep.addAll(Arrays.stream(line.toLowerCase().split(" ")).toList());
                 Iterator<String> it = setRep.iterator();
                 while (it.hasNext()) {
-                    if ((it.next()).length() <4 ) {
+                    if ((it.next()).length() < 4) {
                         it.remove();
                     }
                 }
@@ -121,7 +121,7 @@ public class Cryptographer {
                     setDec.addAll(Arrays.stream(bruteForce.decryptByBruteForce(line).toLowerCase().split(" ")).toList());
                     Iterator<String> it = setDec.iterator();
                     while (it.hasNext()) {
-                        if ((it.next()).length() <4 ) {
+                        if ((it.next()).length() < 4) {
                             it.remove();
                         }
                     }
@@ -135,11 +135,14 @@ public class Cryptographer {
                 }
             }
         }
-        fileManager.createFile(fileDstPath);
-        String line = fileManager.readFile(fileSrcPath);
-        while (line != null) {
-            fileManager.writeFile(bruteForce.decryptByBruteForce(line) + '\n', fileDstPath);
-            line = fileManager.readFile(fileSrcPath);
+        if (!validator.isFileExists(fileDstPath)
+                && validator.isFileTxt(fileDstPath)) {
+            fileManager.createFile(fileDstPath);
+            String line = fileManager.readFile(fileSrcPath);
+            while (line != null) {
+                fileManager.writeFile(bruteForce.decryptByBruteForce(line) + '\n', fileDstPath);
+                line = fileManager.readFile(fileSrcPath);
+            }
         }
     }
 
@@ -153,7 +156,7 @@ public class Cryptographer {
                 decrypt();
                 break;
             }
-            case ("BF") : {
+            case ("BF"): {
                 decryptByBruteForce();
                 break;
             }
