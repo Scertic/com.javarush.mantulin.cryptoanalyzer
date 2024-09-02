@@ -3,6 +3,7 @@ package org.example.files;
 import org.example.ecxeptions.CaesarsCipherException;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,8 +20,8 @@ public class FileManager {
             }
             //TODO закрытие потока?
             return bufferedReader.readLine();
-        } catch (Exception e) {
-            throw new CaesarsCipherException(e.getMessage());
+        } catch (IOException e) {
+            throw new CaesarsCipherException(e.getMessage(), e);
         }
     }
 
@@ -28,8 +29,16 @@ public class FileManager {
         try {
             Path path = Path.of(filePath);
             Files.writeString(path, content, StandardOpenOption.APPEND);
-        } catch (Exception e) {
-            throw new CaesarsCipherException(e.getMessage());
+        } catch (IOException e) {
+            throw new CaesarsCipherException(e.getMessage(), e);
+        }
+    }
+
+    public void createFile(String filePath) {
+        try {
+            Files.createFile(Path.of(filePath));
+        } catch (IOException e) {
+            throw new CaesarsCipherException(e.getMessage(), e);
         }
     }
 }

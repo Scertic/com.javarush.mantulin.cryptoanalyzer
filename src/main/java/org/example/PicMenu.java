@@ -67,8 +67,7 @@ public class PicMenu implements Runnable {
     }
 
     public static void main(String[] args) {
-        int exitCode = new CommandLine(new
-                PicMenu()).execute(args);
+        int exitCode = new CommandLine(new PicMenu()).execute(args);
         System.exit(exitCode);
     }
 }
