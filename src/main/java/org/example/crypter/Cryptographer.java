@@ -52,6 +52,7 @@ public class Cryptographer {
                 fileManager.writeFile(cipher.encrypt(line, key) + '\n', fileDstPath);
                 line = fileManager.readFile(fileSrcPath);
             }
+            fileManager.close();
             System.out.println("Done!");
         } else {
             System.out.println("Something gone wrong.");
@@ -72,6 +73,7 @@ public class Cryptographer {
                 fileManager.writeFile(cipher.decrypt(line, key) + '\n', fileDstPath);
                 line = fileManager.readFile(fileSrcPath);
             }
+            fileManager.close();
             System.out.println("Done!");
         } else {
             System.out.println("Something gone wrong.");
@@ -103,11 +105,12 @@ public class Cryptographer {
                 line = fmRep.readFile(representativeText);
             }
         }
+        fmRep.close();
         //поиск ключа
         key = 0;
-        FileManager fmSrc = new FileManager();
         OUT:
         for (int i = 1; i < bruteForce.getAlphabet().getSize(); i++) {
+            FileManager fmSrc = new FileManager();
             setDec = new HashSet<>();
             key = i;
             bruteForce.setShift(key);
@@ -128,6 +131,7 @@ public class Cryptographer {
                     line = fmSrc.readFile(fileSrcPath);
                 }
             }
+            fmSrc.close();
             //количество совпадений > 1
             for (String s : setDec) {
                 if (setRep.contains(s)) {
@@ -143,6 +147,7 @@ public class Cryptographer {
                 fileManager.writeFile(bruteForce.decryptByBruteForce(line) + '\n', fileDstPath);
                 line = fileManager.readFile(fileSrcPath);
             }
+            fileManager.close();
         }
     }
 

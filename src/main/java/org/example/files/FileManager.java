@@ -41,4 +41,12 @@ public class FileManager {
             throw new CaesarsCipherException(e.getMessage(), e);
         }
     }
+
+    public void close() {
+        try {
+            this.bufferedReader.close();
+        } catch (IOException e) {
+            throw new CaesarsCipherException(e.getMessage(), e);
+        }
+    }
 }
