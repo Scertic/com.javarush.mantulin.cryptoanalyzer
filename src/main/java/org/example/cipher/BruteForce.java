@@ -13,14 +13,14 @@ import java.util.Iterator;
 public class BruteForce {
 
     private int key;
-    private String fileSrcPath;
-    private String fileDstPath;
-    private String representativeText;
+    private final String fileSrcPath;
+    private final String fileDstPath;
+    private final String representativeText;
 
-    private Validator validator;
-    private FileManager fileManager;
+    private final Validator validator;
+    private final FileManager fileManager;
 
-    private Alphabet alphabet;
+    private final Alphabet alphabet;
     private HashSet<String> setRep;
 
     public BruteForce(String fileSrcPath, String fileDstPath, String representativeText) {
@@ -33,7 +33,7 @@ public class BruteForce {
         setSetRep();
     }
 
-    public void setSetRep() {
+    private void setSetRep() {
         setRep = new HashSet<>();
         FileManager fmRep = new FileManager();
         //создание репрезентативной выборки
@@ -57,7 +57,7 @@ public class BruteForce {
         fmRep.close();
     }
 
-    public void setKey() {
+    private void setKey() {
         OUT:
         for (int i = 0; i < alphabet.getSize(); i++) {
             FileManager fmSrc = new FileManager();
@@ -90,7 +90,7 @@ public class BruteForce {
         }
     }
 
-    public String decryptByBruteForce(String encryptedText) {
+    private String decryptByBruteForce(String encryptedText) {
         try {
             StringBuilder result = new StringBuilder();
             String textLC = encryptedText.toLowerCase();
