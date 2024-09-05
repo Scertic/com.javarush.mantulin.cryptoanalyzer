@@ -57,7 +57,7 @@ public class BruteForce {
         fmRep.close();
     }
 
-    private void setKey() {
+    private void findKey() {
         OUT:
         for (int i = 0; i < alphabet.getSize(); i++) {
             FileManager fmSrc = new FileManager();
@@ -108,7 +108,7 @@ public class BruteForce {
     public void start() {
         if (!validator.isFileExists(fileDstPath)
                 && validator.isFileTxt(fileDstPath)) {
-            setKey();
+            findKey();
             fileManager.createFile(fileDstPath);
             String line = fileManager.readFile(fileSrcPath);
             while (line != null) {
