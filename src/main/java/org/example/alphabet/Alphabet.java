@@ -31,21 +31,20 @@ public class Alphabet {
     }
 
     public int indexOf(char c){
-        if (alphabetMap.get(c) == null) {
+        if (!alphabetMap.containsKey(c)) {
             throw new CaesarsCipherException("Wrong symbol: " + c);
         }
         return alphabetMap.get(c);
     }
 
-    public boolean containsChar(char c){
-        return alphabetMap.containsKey(c);
+    public char charOf(int index){
+        if (index < 0 || index > alphabet.length) {
+            throw new CaesarsCipherException("Index is invalid.");
+        }
+        return alphabet[index];
     }
 
     public int getSize() {
         return this.alphabet.length;
-    }
-
-    public char getChar(int index){
-        return alphabet[index];
     }
 }

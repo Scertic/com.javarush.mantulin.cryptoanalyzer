@@ -1,4 +1,4 @@
-package org.example;
+package org.example.consoleui;
 
 import org.example.cipher.BruteForce;
 import org.example.cipher.CaesarCoder;
@@ -27,7 +27,7 @@ public class ConsoleApp {
                     String fileDstPath = scanner.nextLine();
                     System.out.print("Введите ключ: ");
                     int key = scanner.nextInt();
-                    new CaesarCoder(command, fileSrcPath,fileDstPath, key).start();
+                    new CaesarCoder().encrypt(fileSrcPath, fileDstPath, key);
                     break;
                 }
                 case 2: {

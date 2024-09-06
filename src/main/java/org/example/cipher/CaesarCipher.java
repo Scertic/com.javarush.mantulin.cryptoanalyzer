@@ -27,16 +27,18 @@ public class CaesarCipher {
     private String cryptProcess(String text, int shift) {
         try {
             StringBuilder result = new StringBuilder();
-            String textLC = text.toLowerCase();
             for (int i = 0; i < text.length(); i++) {
-                if (alphabet.containsChar(textLC.charAt(i))) {
-                    result.append(alphabet.getChar((alphabet.indexOf(textLC.charAt(i)) + shift + alphabet.getSize()) % alphabet.getSize()));
-                }
+                char charFromText = toLowerCase(text.charAt(i));
+                result.append(alphabet.charOf((alphabet.indexOf(charFromText) + shift + alphabet.getSize()) % alphabet.getSize()));
             }
             return result.toString();
         } catch (Exception e) {
             throw new CaesarsCipherException(e.getMessage(), e);
         }
+    }
+
+    private char toLowerCase(char ch) {
+        return (ch + "").toLowerCase().charAt(0);
     }
 
     public Alphabet getAlphabet() {
