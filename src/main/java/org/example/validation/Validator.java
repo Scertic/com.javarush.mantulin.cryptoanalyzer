@@ -3,6 +3,7 @@ package org.example.validation;
 import org.example.alphabet.Alphabet;
 import org.example.ecxeptions.CaesarsCipherException;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
@@ -12,9 +13,21 @@ public class Validator {
         return key >= 0 && key <= alphabet.getSize();
     }
 
+    public void validateForReading(String filePath) {
+        Path path = validatePath(filePath);
+        if (isFileExists(path.toString())) {
+            if (!Files.isReadable(path)) {
+                throw new CaesarsCipherException("File " + path + "is not readable!");
+            }
+        }
+    }
+
     public boolean isFileExists(String filePath) {
         Path path = validatePath(filePath);
         try {
+            if (!path.toString().endsWith(".txt")) {
+                throw new CaesarsCipherException("Invalid file format.");
+            }
             if (Files.exists(path) && Files.isRegularFile(path)) {
                 return true;
             }
@@ -23,16 +36,8 @@ public class Validator {
         }
         return false;
     }
-    
-    public boolean isFileTxt(String filePath) {
-        Path path = validatePath(filePath);
-        if (!path.toString().endsWith(".txt")) {
-            throw new CaesarsCipherException("Invalid file format.");
-        }
-        return true;
-    }
 
-    public Path validatePath(String filePath) {
+    private Path validatePath(String filePath) {
         try {
             return Path.of(filePath);
         } catch (SecurityException | InvalidPathException e) {

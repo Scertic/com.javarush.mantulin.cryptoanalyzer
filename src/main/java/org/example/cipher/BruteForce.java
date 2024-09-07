@@ -13,33 +13,23 @@ import java.util.Iterator;
 public class BruteForce {
 
     private int key;
-    private final String fileSrcPath;
-    private final String fileDstPath;
-    private final String representativeText;
-
     private final Validator validator;
     private final FileManager fileManager;
-
     private final Alphabet alphabet;
     private HashSet<String> setRep;
 
-    public BruteForce(String fileSrcPath, String fileDstPath, String representativeText) {
-        this.fileSrcPath = fileSrcPath;
-        this.fileDstPath = fileDstPath;
-        this.representativeText = representativeText;
+    public BruteForce() {
         this.validator = new Validator();
         this.fileManager = new FileManager();
         this.alphabet = new Alphabet();
-        setSetRep();
     }
 
-    private void setSetRep() {
+    private void setSetRep(String representativeText) {
         setRep = new HashSet<>();
         FileManager fmRep = new FileManager();
         //создание репрезентативной выборки
-        if (validator.isFileExists(representativeText)
-                && validator.isFileTxt(representativeText)) {
-            String line = fmRep.readFile(representativeText);
+        if (validator.isFileExists(representativeText)) {
+            String line = fmRep.readLineFromFile(representativeText);
             for (int i = 0; i < 100; i++) {
                 if (line == null) {
                     break;
@@ -51,21 +41,20 @@ public class BruteForce {
                         it.remove();
                     }
                 }
-                line = fmRep.readFile(representativeText);
+                line = fmRep.readLineFromFile(representativeText);
             }
         }
         fmRep.close();
     }
 
-    private void findKey() {
+    private void findTheKey(String fileSrcPath) {
         OUT:
         for (int i = 0; i < alphabet.getSize(); i++) {
             FileManager fmSrc = new FileManager();
             HashSet<String> setDec = new HashSet<>();
             this.key = i;
-            if (validator.isFileExists(fileSrcPath)
-                    && validator.isFileTxt(fileSrcPath)) {
-                String line = fmSrc.readFile(fileSrcPath);
+            if (validator.isFileExists(fileSrcPath)) {
+                String line = fmSrc.readLineFromFile(fileSrcPath);
                 for (int j = 0; j < 10; j++) {
                     if (line == null) {
                         break;
@@ -77,7 +66,7 @@ public class BruteForce {
                             it.remove();
                         }
                     }
-                    line = fmSrc.readFile(fileSrcPath);
+                    line = fmSrc.readLineFromFile(fileSrcPath);
                 }
             }
             fmSrc.close();
@@ -93,11 +82,9 @@ public class BruteForce {
     private String decryptByBruteForce(String encryptedText) {
         try {
             StringBuilder result = new StringBuilder();
-            String textLC = encryptedText.toLowerCase();
             for (int i = 0; i < encryptedText.length(); i++) {
-                if (alphabet.containsChar(textLC.charAt(i))) {
-                    result.append(alphabet.getChar((alphabet.indexOf(textLC.charAt(i)) - key + alphabet.getSize()) % alphabet.getSize()));
-                }
+                char charFromText = toLowerCase(encryptedText.charAt(i));
+                result.append(alphabet.charOf((alphabet.indexOf(charFromText) - key + alphabet.getSize()) % alphabet.getSize()));
             }
             return result.toString();
         } catch (Exception e) {
@@ -105,17 +92,23 @@ public class BruteForce {
         }
     }
 
-    public void start() {
-        if (!validator.isFileExists(fileDstPath)
-                && validator.isFileTxt(fileDstPath)) {
-            findKey();
+    public void decrypt(String fileSrcPath, String fileDstPath, String representativeText) {
+        validator.validateForReading(representativeText);
+        validator.validateForReading(fileSrcPath);
+        if (!validator.isFileExists(fileDstPath)) {
+            setSetRep(representativeText);
+            findTheKey(fileSrcPath);
             fileManager.createFile(fileDstPath);
-            String line = fileManager.readFile(fileSrcPath);
+            String line = fileManager.readLineFromFile(fileSrcPath);
             while (line != null) {
-                fileManager.writeFile(decryptByBruteForce(line) + '\n', fileDstPath);
-                line = fileManager.readFile(fileSrcPath);
+                fileManager.appendToFile(decryptByBruteForce(line) + '\n', fileDstPath);
+                line = fileManager.readLineFromFile(fileSrcPath);
             }
             fileManager.close();
         }
+    }
+
+    private char toLowerCase(char ch) {
+        return (ch + "").toLowerCase().charAt(0);
     }
 }

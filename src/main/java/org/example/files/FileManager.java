@@ -12,7 +12,7 @@ import java.nio.file.StandardOpenOption;
 public class FileManager {
     private BufferedReader bufferedReader;
 
-    public String readFile(String filePath){
+    public String readLineFromFile(String filePath) {
         try {
             Path path = Path.of(filePath);
             if (bufferedReader == null) {
@@ -20,16 +20,16 @@ public class FileManager {
             }
             //TODO закрытие потока?
             return bufferedReader.readLine();
-        } catch (IOException e) {
+        } catch (IOException | RuntimeException e) {
             throw new CaesarsCipherException(e.getMessage(), e);
         }
     }
 
-    public void writeFile(String content, String filePath){
+    public void appendToFile(String content, String filePath) {
         try {
             Path path = Path.of(filePath);
             Files.writeString(path, content, StandardOpenOption.APPEND);
-        } catch (IOException e) {
+        } catch (IOException | RuntimeException e) {
             throw new CaesarsCipherException(e.getMessage(), e);
         }
     }
@@ -37,14 +37,16 @@ public class FileManager {
     public void createFile(String filePath) {
         try {
             Files.createFile(Path.of(filePath));
-        } catch (IOException e) {
+        } catch (IOException | RuntimeException e) {
             throw new CaesarsCipherException(e.getMessage(), e);
         }
     }
 
     public void close() {
         try {
-            this.bufferedReader.close();
+            if (bufferedReader != null) {
+                bufferedReader.close();
+            }
         } catch (IOException e) {
             throw new CaesarsCipherException(e.getMessage(), e);
         }
