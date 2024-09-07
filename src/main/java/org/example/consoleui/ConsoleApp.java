@@ -8,51 +8,104 @@ import java.util.Scanner;
 
 public class ConsoleApp {
 
-    public void start() {
+    private void showMenu() {
         System.out.println("-".repeat(100));
-        System.out.println("1 - Шифр Цезаря\n" +
-                "2 - Brute force\n" +
-                "3 - Статистический анализ");
-        System.out.print("Выберите способ: ");
-        try (Scanner scanner = new Scanner(System.in)) {
-            switch (scanner.nextInt()) {
-                case 1: {
-                    scanner.nextLine();
-                    System.out.println("-".repeat(100));
-                    System.out.print("Введите команду (e - encrypt/d - decrypt): ");
-                    String command = scanner.nextLine();
-                    System.out.print("Введите полный путь до файла источника: ");
-                    String fileSrcPath = scanner.nextLine();
-                    System.out.print("Введите полный путь до файла результата: ");
-                    String fileDstPath = scanner.nextLine();
-                    System.out.print("Введите ключ: ");
-                    int key = scanner.nextInt();
-                    new CaesarCoder().encrypt(fileSrcPath, fileDstPath, key);
-                    break;
-                }
-                case 2: {
-                    scanner.nextLine();
-                    System.out.println("-".repeat(100));
-                    System.out.print("Введите полный путь до файла источника: ");
-                    String fileSrcPath = scanner.nextLine();
-                    System.out.print("Введите полный путь до файла результата: ");
-                    String fileDstPath = scanner.nextLine();
-                    System.out.print("Введите полный путь до файла примера текста: ");
-                    String representativeText = scanner.nextLine();
-                    new BruteForce(fileSrcPath,fileDstPath, representativeText).start();
-                    break;
-                }
-                case 3: {
-                    System.out.println("-".repeat(100));
-                    System.out.println("В разработке.");
-                    break;
-                }
-                default:
-                    System.out.println("Данный пункт не существует. Программа завершается.");
-            }
-        } catch (Exception e) {
-            System.out.println("Некорректный ввод, приложение завершилось. Повторите попытку.");
-            throw new CaesarsCipherException(e.getMessage(), e);
+        for (Operation o : Operation.values()) {
+            System.out.printf("%d - %s", o.ordinal(), o.getDescription());
+            System.out.println();
         }
+        System.out.print("Выберите способ: ");
+    }
+
+    public void start() {
+        showMenu();
+        Operation operation = getOperation();
+        processOperation(operation);
+    }
+
+    private void processOperation(Operation operation) {
+        switch (operation) {
+            case EXIT -> processExit();
+            case ENCRYPT -> processEncrypt();
+            case DECRYPT -> processDecrypt();
+            case BRUTEFORCE -> processBruteForce();
+        }
+    }
+
+    private void processDecrypt() {
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("-".repeat(100));
+            System.out.print("Введите полный путь до файла источника: ");
+            String fileSrcPath = scanner.nextLine();
+            System.out.print("Введите полный путь до файла результата: ");
+            String fileDstPath = scanner.nextLine();
+            System.out.print("Введите ключ: ");
+            int key = scanner.nextInt();
+            new CaesarCoder().decrypt(fileSrcPath, fileDstPath, key);
+        } catch (CaesarsCipherException e) {
+            System.err.println("Произошла ошибка: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void processBruteForce() {
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("-".repeat(100));
+            System.out.print("Введите полный путь до файла источника: ");
+            String fileSrcPath = scanner.nextLine();
+            System.out.print("Введите полный путь до файла результата: ");
+            String fileDstPath = scanner.nextLine();
+            System.out.print("Введите полный путь до файла примера текста: ");
+            String representativeText = scanner.nextLine();
+            new BruteForce().decrypt(fileSrcPath, fileDstPath, representativeText);
+        } catch (CaesarsCipherException e) {
+            System.err.println("Произошла ошибка: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void processEncrypt() {
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("-".repeat(100));
+            System.out.print("Введите полный путь до файла источника: ");
+            String fileSrcPath = scanner.nextLine();
+            System.out.print("Введите полный путь до файла результата: ");
+            String fileDstPath = scanner.nextLine();
+            System.out.print("Введите ключ: ");
+            int key = scanner.nextInt();
+            new CaesarCoder().encrypt(fileSrcPath, fileDstPath, key);
+        } catch (CaesarsCipherException e) {
+            System.err.println("Произошла ошибка: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+    }
+
+    private void processExit() {
+        System.out.println("Завершение работы.");
+    }
+
+    private Operation getOperation() {
+        boolean isAgain = false;
+        do {
+            Scanner scanner = new Scanner(System.in);
+            try {
+                if (isAgain) {
+                    showMenu();
+                }
+                return Operation.getByNumber(Integer.parseInt(scanner.nextLine()));
+            } catch (RuntimeException e) {
+                System.out.println("Operation number is wrong.");
+                System.out.println("Reason: " + e.getMessage());
+                System.out.print("Введите \"again\" для повторного запуска: ");
+                String input = scanner.nextLine();
+                if (input.equalsIgnoreCase("again")) {
+                    isAgain = true;
+                }
+
+            }
+        } while (isAgain);
+
+        return Operation.EXIT;
     }
 }

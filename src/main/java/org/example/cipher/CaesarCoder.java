@@ -33,7 +33,7 @@ public class CaesarCoder {
         }
     }
 
-    private void decrypt(String fileSrcPath, String fileDstPath, int key) {
+    public void decrypt(String fileSrcPath, String fileDstPath, int key) {
         //D:\Java\IDEA\v17\UniverrsityJavaRush\2\wap.txt
         if (validator.isValidKey(key, cipher.getAlphabet())
                 && validator.isFileExists(fileSrcPath)
