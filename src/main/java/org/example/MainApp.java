@@ -32,7 +32,7 @@ public class MainApp {
             }
         } catch (Exception e) {
             System.out.println("Некорректный ввод, приложение завершилось. Повторите попытку.");
-            throw new CaesarsCipherException(e.getMessage(), e);
+            e.printStackTrace();
         }
     }
 }
