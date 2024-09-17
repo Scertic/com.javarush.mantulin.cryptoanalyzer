@@ -24,7 +24,8 @@ public class MainApp {
                     break;
                 }
                 case 3 : {
-                    System.out.println("В разработке.");
+                    //System.out.println("В разработке.");
+                    MainFX.main(args);
                     break;
                 }
                 default:

@@ -47,4 +47,5 @@ public class Alphabet {
     public int getSize() {
         return this.alphabet.length;
     }
+
 }
