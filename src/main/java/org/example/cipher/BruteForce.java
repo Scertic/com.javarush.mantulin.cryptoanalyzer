@@ -55,7 +55,7 @@ public class BruteForce {
             this.key = i;
             if (validator.isFileExists(fileSrcPath)) {
                 String line = fmSrc.readLineFromFile(fileSrcPath);
-                for (int j = 0; j < 10; j++) {
+                for (int j = 0; j < 100; j++) {
                     if (line == null) {
                         break;
                     }

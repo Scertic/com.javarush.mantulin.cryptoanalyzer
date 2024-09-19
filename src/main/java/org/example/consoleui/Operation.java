@@ -4,7 +4,8 @@ public enum Operation {
     EXIT("Выход"),
     ENCRYPT("Шифрование файла методом Цезаря"),
     DECRYPT("Дешифровка файла методом Цезаря"),
-    BRUTEFORCE("Дешифровка файла перебором ключа");
+    BRUTEFORCE("Дешифровка файла перебором ключа"),
+    STATISTIC_ANALISE("Статический анализ");
 
     private final String description;
 
