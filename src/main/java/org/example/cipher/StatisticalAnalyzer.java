@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class StatisticalAnalyzer {
 
-    public static int findMostLikelyShift(String file, String repFile, Alphabet alphabet) {
+    public int findMostLikelyShift(String file, String repFile, Alphabet alphabet) {
         Validator validator = new Validator();
         validator.validateForReading(file);
         Map<Character, Integer> charMap = getCharacterIntegerMap(file);
@@ -26,7 +26,7 @@ public class StatisticalAnalyzer {
         return Math.abs(alphabet.indexOf(maxCharCharacter) - alphabet.indexOf(maxCharRepCharacter));
     }
 
-    private static Character getMaxCharacter(Map<Character, Integer> charMap, int maxCharMap) {
+    private Character getMaxCharacter(Map<Character, Integer> charMap, int maxCharMap) {
         Character maxCharCharacter = null;
         for (Map.Entry<Character, Integer> entry : charMap.entrySet()) {
             if (entry.getValue() == maxCharMap) {
@@ -37,7 +37,7 @@ public class StatisticalAnalyzer {
         return maxCharCharacter;
     }
 
-    private static Map<Character, Integer> getCharacterIntegerMap(String file) {
+    private Map<Character, Integer> getCharacterIntegerMap(String file) {
         FileManager fileManager = new FileManager();
         Map<Character, Integer> charMap = new HashMap<>();
         String line = fileManager.readLineFromFile(file);

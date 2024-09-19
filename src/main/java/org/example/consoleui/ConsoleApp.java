@@ -44,7 +44,7 @@ public class ConsoleApp {
             String fileDstPath = scanner.nextLine();
             System.out.print("Введите полный путь до файла примера текста: ");
             String representativeText = scanner.nextLine();
-            int key = StatisticalAnalyzer.findMostLikelyShift(fileSrcPath, representativeText, new Alphabet());
+            int key = new StatisticalAnalyzer().findMostLikelyShift(fileSrcPath, representativeText, new Alphabet());
             new CaesarCoder().decrypt(fileSrcPath, fileDstPath, key);
         } catch (CaesarsCipherException e) {
             System.err.println("Произошла ошибка: " + e.getMessage());
