@@ -11,6 +11,10 @@ public class CaesarsCipherException extends RuntimeException{
         this.message = message;
     }
 
+    public CaesarsCipherException(Throwable cause) {
+        super(cause);
+    }
+
     @Override
     public String getMessage() {
         return this.message;

@@ -1,7 +1,9 @@
 package org.example.consoleui;
 
+import org.example.alphabet.Alphabet;
 import org.example.cipher.BruteForce;
 import org.example.cipher.CaesarCoder;
+import org.example.cipher.StatisticalAnalyzer;
 import org.example.ecxeptions.CaesarsCipherException;
 
 import java.util.Scanner;
@@ -29,6 +31,24 @@ public class ConsoleApp {
             case ENCRYPT -> processEncrypt();
             case DECRYPT -> processDecrypt();
             case BRUTEFORCE -> processBruteForce();
+            case STATISTIC_ANALISE -> processStatisticAnalise();
+        }
+    }
+
+    private void processStatisticAnalise() {
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("-".repeat(100));
+            System.out.print("Введите полный путь до файла источника: ");
+            String fileSrcPath = scanner.nextLine();
+            System.out.print("Введите полный путь до файла результата: ");
+            String fileDstPath = scanner.nextLine();
+            System.out.print("Введите полный путь до файла примера текста: ");
+            String representativeText = scanner.nextLine();
+            int key = new StatisticalAnalyzer().findMostLikelyShift(fileSrcPath, representativeText, new Alphabet());
+            new CaesarCoder().decrypt(fileSrcPath, fileDstPath, key);
+        } catch (CaesarsCipherException e) {
+            System.err.println("Произошла ошибка: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
