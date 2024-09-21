@@ -36,67 +36,103 @@ public class ConsoleApp {
     }
 
     private void processStatisticAnalise() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("-".repeat(100));
-            System.out.print("Введите полный путь до файла источника: ");
-            String fileSrcPath = scanner.nextLine();
-            System.out.print("Введите полный путь до файла результата: ");
-            String fileDstPath = scanner.nextLine();
-            System.out.print("Введите полный путь до файла примера текста: ");
-            String representativeText = scanner.nextLine();
-            int key = new StatisticalAnalyzer().findMostLikelyShift(fileSrcPath, representativeText, new Alphabet());
-            new CaesarCoder().decrypt(fileSrcPath, fileDstPath, key);
-        } catch (CaesarsCipherException e) {
-            System.err.println("Произошла ошибка: " + e.getMessage());
-            e.printStackTrace();
+        boolean isAgain = false;
+        while (!isAgain) {
+            Scanner scanner = null;
+            try {
+                scanner = new Scanner(System.in);
+                System.out.println("-".repeat(100));
+                System.out.print("Введите полный путь до файла источника: ");
+                String fileSrcPath = scanner.nextLine();
+                System.out.print("Введите полный путь до файла результата: ");
+                String fileDstPath = scanner.nextLine();
+                System.out.print("Введите полный путь до файла примера текста: ");
+                String representativeText = scanner.nextLine();
+                int key = new StatisticalAnalyzer().findMostLikelyShift(fileSrcPath, representativeText, new Alphabet());
+                new CaesarCoder().decrypt(fileSrcPath, fileDstPath, key);
+            } catch (CaesarsCipherException e) {
+                System.out.println("Произошла ошибка: " + e.getMessage());
+                System.out.println("Чтобы попробовать снова введите \"again\":");
+                String s = scanner.nextLine();
+                if (!s.equalsIgnoreCase("again")) {
+                    isAgain = true;
+                }
+            }
         }
     }
 
     private void processDecrypt() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("-".repeat(100));
-            System.out.print("Введите полный путь до файла источника: ");
-            String fileSrcPath = scanner.nextLine();
-            System.out.print("Введите полный путь до файла результата: ");
-            String fileDstPath = scanner.nextLine();
-            System.out.print("Введите ключ: ");
-            int key = scanner.nextInt();
-            new CaesarCoder().decrypt(fileSrcPath, fileDstPath, key);
-        } catch (CaesarsCipherException e) {
-            System.err.println("Произошла ошибка: " + e.getMessage());
-            e.printStackTrace();
+        boolean isAgain = false;
+        while (!isAgain) {
+            Scanner scanner = null;
+            try {
+                scanner = new Scanner(System.in);
+                System.out.println("-".repeat(100));
+                System.out.print("Введите полный путь до файла источника: ");
+                String fileSrcPath = scanner.nextLine();
+                System.out.print("Введите полный путь до файла результата: ");
+                String fileDstPath = scanner.nextLine();
+                System.out.print("Введите ключ: ");
+                int key = Integer.parseInt(scanner.nextLine());
+                new CaesarCoder().decrypt(fileSrcPath, fileDstPath, key);
+            } catch (CaesarsCipherException | NumberFormatException e) {
+                System.out.println("Произошла ошибка: " + e.getMessage());
+                System.out.println("Чтобы попробовать снова введите \"again\":");
+                String s = scanner.nextLine();
+                if (!s.equalsIgnoreCase("again")) {
+                    isAgain = true;
+                }
+            }
         }
     }
 
     private void processBruteForce() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("-".repeat(100));
-            System.out.print("Введите полный путь до файла источника: ");
-            String fileSrcPath = scanner.nextLine();
-            System.out.print("Введите полный путь до файла результата: ");
-            String fileDstPath = scanner.nextLine();
-            System.out.print("Введите полный путь до файла примера текста: ");
-            String representativeText = scanner.nextLine();
-            new BruteForce().decrypt(fileSrcPath, fileDstPath, representativeText);
-        } catch (CaesarsCipherException e) {
-            System.err.println("Произошла ошибка: " + e.getMessage());
-            e.printStackTrace();
+        boolean isAgain = false;
+        while (!isAgain) {
+            Scanner scanner = null;
+            try {
+                scanner = new Scanner(System.in);
+                System.out.println("-".repeat(100));
+                System.out.print("Введите полный путь до файла источника: ");
+                String fileSrcPath = scanner.nextLine();
+                System.out.print("Введите полный путь до файла результата: ");
+                String fileDstPath = scanner.nextLine();
+                System.out.print("Введите полный путь до файла примера текста: ");
+                String representativeText = scanner.nextLine();
+                new BruteForce().decrypt(fileSrcPath, fileDstPath, representativeText);
+            } catch (CaesarsCipherException e) {
+                System.out.println("Произошла ошибка: " + e.getMessage());
+                System.out.println("Чтобы попробовать снова введите \"again\":");
+                String s = scanner.nextLine();
+                if (!s.equalsIgnoreCase("again")) {
+                    isAgain = true;
+                }
+            }
         }
     }
 
     private void processEncrypt() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("-".repeat(100));
-            System.out.print("Введите полный путь до файла источника: ");
-            String fileSrcPath = scanner.nextLine();
-            System.out.print("Введите полный путь до файла результата: ");
-            String fileDstPath = scanner.nextLine();
-            System.out.print("Введите ключ: ");
-            int key = scanner.nextInt();
-            new CaesarCoder().encrypt(fileSrcPath, fileDstPath, key);
-        } catch (CaesarsCipherException e) {
-            System.err.println("Произошла ошибка: " + e.getMessage());
-            e.printStackTrace();
+        boolean isAgain = false;
+        while (!isAgain) {
+            Scanner scanner = null;
+            try {
+                scanner = new Scanner(System.in);
+                System.out.println("-".repeat(100));
+                System.out.print("Введите полный путь до файла источника: ");
+                String fileSrcPath = scanner.nextLine();
+                System.out.print("Введите полный путь до файла результата: ");
+                String fileDstPath = scanner.nextLine();
+                System.out.print("Введите ключ: ");
+                int key = Integer.parseInt(scanner.nextLine());
+                new CaesarCoder().encrypt(fileSrcPath, fileDstPath, key);
+            } catch (CaesarsCipherException | NumberFormatException e) {
+                System.out.println("Произошла ошибка: " + e.getMessage());
+                System.out.println("Чтобы попробовать снова введите \"again\":");
+                String s = scanner.nextLine();
+                if (!s.equalsIgnoreCase("again")) {
+                    isAgain = true;
+                }
+            }
         }
 
     }
