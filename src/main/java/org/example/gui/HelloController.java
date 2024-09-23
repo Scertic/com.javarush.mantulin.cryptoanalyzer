@@ -8,6 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import org.example.alphabet.Alphabet;
+import org.example.cipher.BruteForce;
+import org.example.cipher.CaesarCoder;
+import org.example.cipher.StatisticalAnalyzer;
 
 public class HelloController {
     @FXML
@@ -38,16 +41,44 @@ public class HelloController {
     @FXML
     void initialize() {
         button.setOnAction(actionEvent -> {
-            String srcFile = "";
-            String dstFile = "";
-            String rFile = "";
-            int key = -1;
-            try {
-                key = Integer.parseInt(this.key.getText());
-            } catch (NumberFormatException e) {
-                this.key.setPromptText("Введите целое число от 0 до " + (new Alphabet().getSize() - 1));
-                this.key.clear();
+            String srcFile = this.srcFile.getText();
+            String dstFile = this.dstFile.getText();
+            String rFile = this.rFile.getText();
+            int process = this.process.getSelectionModel().getSelectedIndex();
+            switch (process) {
+                case 0 : {
+                    int key = -1;
+                    try {
+                        key = Integer.parseInt(this.key.getText());
+                    } catch (NumberFormatException e) {
+                        this.key.setPromptText("Введите целое число от 0 до " + (new Alphabet().getSize() - 1));
+                        this.key.clear();
+                    }
+                    new CaesarCoder().encrypt(srcFile, dstFile, key);
+                    break;
+                }
+                case 1 : {
+                    int key = -1;
+                    try {
+                        key = Integer.parseInt(this.key.getText());
+                    } catch (NumberFormatException e) {
+                        this.key.setPromptText("Введите целое число от 0 до " + (new Alphabet().getSize() - 1));
+                        this.key.clear();
+                    }
+                    new CaesarCoder().decrypt(srcFile, dstFile, key);
+                    break;
+                }
+                case 2 : {
+                    new BruteForce().decrypt(srcFile, dstFile, rFile);
+                    break;
+                }
+                case 3 : {
+                    int key = new StatisticalAnalyzer().findMostLikelyShift(srcFile, rFile, new Alphabet());
+                    new CaesarCoder().decrypt(srcFile, dstFile, key);
+                    break;
+                }
             }
+
         });
 
     }
