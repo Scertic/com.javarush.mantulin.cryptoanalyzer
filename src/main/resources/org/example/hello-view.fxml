@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gui.HelloController">
+   <children>
+      <Label prefHeight="53.0" prefWidth="602.0" text="Шифратор Цезаря" textAlignment="CENTER" underline="true">
+         <font>
+            <Font size="36.0" />
+         </font>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </Label>
+      <Label text="Введите полный путь до файла источника" />
+      <TextField fx:id="srcFile" prefWidth="591.0" />
+      <Pane prefHeight="23.0" prefWidth="600.0" />
+      <Label text="Введите полный путь до файла результата" />
+      <TextField fx:id="dstFile" />
+      <Pane prefHeight="26.0" prefWidth="600.0" />
+      <Label text="Введите полный путь для репрезентативного файла" />
+      <TextField fx:id="rFile" />
+      <Pane prefHeight="29.0" prefWidth="600.0" />
+      <Label text="Введите ключ" />
+      <TextField fx:id="key" />
+      <Pane prefHeight="29.0" prefWidth="600.0" />
+      <Label text="Выберите способ" />
+      <ComboBox fx:id="process" prefWidth="150.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Шифрование" />
+               <String fx:value="Расшифровка" />
+               <String fx:value="Brute Force" />
+               <String fx:value="Статистический анализ" />
+            </FXCollections>
+         </items>
+      </ComboBox>
+      <Pane prefHeight="113.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="button" layoutX="251.0" layoutY="32.0" mnemonicParsing="false" text="Выполнить" />
+         </children>
+      </Pane>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</VBox>
