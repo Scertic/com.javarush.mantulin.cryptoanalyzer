@@ -1,9 +1,7 @@
 package org.example.gui;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -13,11 +11,6 @@ import org.example.cipher.CaesarCoder;
 import org.example.cipher.StatisticalAnalyzer;
 
 public class HelloController {
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Button button;
@@ -46,7 +39,7 @@ public class HelloController {
             String rFile = this.rFile.getText();
             int process = this.process.getSelectionModel().getSelectedIndex();
             switch (process) {
-                case 0 : {
+                case 0: {
                     int key = -1;
                     try {
                         key = Integer.parseInt(this.key.getText());
@@ -54,10 +47,15 @@ public class HelloController {
                         this.key.setPromptText("Введите целое число от 0 до " + (new Alphabet().getSize() - 1));
                         this.key.clear();
                     }
-                    new CaesarCoder().encrypt(srcFile, dstFile, key);
+                    try {
+                        new CaesarCoder().encrypt(srcFile, dstFile, key);
+                    } catch (Exception e) {
+                        Alert alarm = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                        alarm.show();
+                    }
                     break;
                 }
-                case 1 : {
+                case 1: {
                     int key = -1;
                     try {
                         key = Integer.parseInt(this.key.getText());
@@ -65,16 +63,31 @@ public class HelloController {
                         this.key.setPromptText("Введите целое число от 0 до " + (new Alphabet().getSize() - 1));
                         this.key.clear();
                     }
-                    new CaesarCoder().decrypt(srcFile, dstFile, key);
+                    try {
+                        new CaesarCoder().decrypt(srcFile, dstFile, key);
+                    } catch (Exception e) {
+                        Alert alarm = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                        alarm.show();
+                    }
                     break;
                 }
-                case 2 : {
-                    new BruteForce().decrypt(srcFile, dstFile, rFile);
+                case 2: {
+                    try {
+                        new BruteForce().decrypt(srcFile, dstFile, rFile);
+                    } catch (Exception e) {
+                        Alert alarm = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                        alarm.show();
+                    }
                     break;
                 }
-                case 3 : {
-                    int key = new StatisticalAnalyzer().findMostLikelyShift(srcFile, rFile, new Alphabet());
-                    new CaesarCoder().decrypt(srcFile, dstFile, key);
+                case 3: {
+                    try {
+                        int key = new StatisticalAnalyzer().findMostLikelyShift(srcFile, rFile, new Alphabet());
+                        new CaesarCoder().decrypt(srcFile, dstFile, key);
+                    } catch (Exception e) {
+                        Alert alarm = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                        alarm.show();
+                    }
                     break;
                 }
             }

@@ -8,10 +8,11 @@ import java.util.Scanner;
 
 public class MainApp {
     public static void main(String[] args) {
-        System.out.println("1 - Консольное меню\n" +
-                "2 - Запуск с праметрами\n" +
-                "3 - Оконное приложение\n" +
-                "0 - Выход из программы (0 или любой другой символ).");
+        System.out.println("""
+                1 - Консольное меню
+                2 - Запуск с праметрами
+                3 - Оконное приложение
+                0 - Выход из программы (0 или любой другой символ).""");
         System.out.print("Выберите способ запуска: ");
         try (Scanner scanner = new Scanner(System.in)) {
             switch(scanner.nextLine()) {

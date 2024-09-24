@@ -8,7 +8,6 @@ import org.example.validation.Validator;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 
 public class BruteForce {
 
@@ -35,12 +34,7 @@ public class BruteForce {
                     break;
                 }
                 setRep.addAll(Arrays.stream(line.toLowerCase().split(" ")).toList());
-                Iterator<String> it = setRep.iterator();
-                while (it.hasNext()) {
-                    if ((it.next()).length() < 4) {
-                        it.remove();
-                    }
-                }
+                setRep.removeIf(s -> (s).length() < 4);
                 line = fmRep.readLineFromFile(representativeText);
             }
         }
@@ -60,12 +54,7 @@ public class BruteForce {
                         break;
                     }
                     setDec.addAll(Arrays.stream(decryptByBruteForce(line).split(" ")).toList());
-                    Iterator<String> it = setDec.iterator();
-                    while (it.hasNext()) {
-                        if ((it.next()).length() < 4) {
-                            it.remove();
-                        }
-                    }
+                    setDec.removeIf(s -> (s).length() < 4);
                     line = fmSrc.readLineFromFile(fileSrcPath);
                 }
             }
