@@ -26,7 +26,7 @@ public class Validator {
         Path path = validatePath(filePath);
         try {
             if (!path.toString().endsWith(".txt")) {
-                throw new CaesarsCipherException("Invalid file format.");
+                throw new CaesarsCipherException("Invalid file "+ filePath + " format.");
             }
             if (Files.exists(path) && Files.isRegularFile(path)) {
                 return true;

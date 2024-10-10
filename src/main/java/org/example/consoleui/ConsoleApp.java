@@ -127,7 +127,7 @@ public class ConsoleApp {
                 new CaesarCoder().encrypt(fileSrcPath, fileDstPath, key);
             } catch (CaesarsCipherException | NumberFormatException e) {
                 System.out.println("Произошла ошибка: " + e.getMessage());
-                System.out.println("Чтобы попробовать снова введите \"again\":");
+                System.out.println("Чтобы попробовать снова введите \"again\". Чтобы завершить введите любой символ.");
                 String s = scanner.nextLine();
                 if (!s.equalsIgnoreCase("again")) {
                     isAgain = true;

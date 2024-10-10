@@ -57,12 +57,4 @@ public class StatisticalAnalyzer {
         fileManager.close();
         return charMap;
     }
-
-    public static void main(String[] args) {
-        StatisticalAnalyzer statisticalAnalyzer = new StatisticalAnalyzer();
-        int key = statisticalAnalyzer.findMostLikelyShift("D:\\Java\\IDEA\\v17\\UniverrsityJavaRush\\2\\rt.txt"
-                , "D:\\Java\\IDEA\\v17\\UniverrsityJavaRush\\2\\encrypt_wap_10.txt"
-                , new Alphabet());
-        System.out.println(key);
-    }
 }
