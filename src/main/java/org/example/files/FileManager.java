@@ -3,15 +3,27 @@ package org.example.files;
 import org.example.ecxeptions.CaesarsCipherException;
 
 import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
-public class FileManager {
+/**
+ * Класс для работы с файлами. Использует для чтения Files.newBufferedReader, что требует закрытие потока чтения после
+ * считывания файла методом close().
+ */
+public class FileManager implements Closeable {
     private BufferedReader bufferedReader;
 
+    /**
+     * Метод читает и возвращает строку из файла.
+     *
+     * @param filePath - путь к файлу для чтения.
+     * @return возвращает объект типа String, возвращает null, если файл был считан.
+     * @throws CaesarsCipherException
+     */
     public String readLineFromFile(String filePath) {
         try {
             Path path = Path.of(filePath);
@@ -25,6 +37,13 @@ public class FileManager {
         }
     }
 
+    /**
+     * Добавляет строку в файл.
+     *
+     * @param content  - Строка с данными для записи.
+     * @param filePath - Файл для записи.
+     * @throws CaesarsCipherException
+     */
     public void appendToFile(String content, String filePath) {
         try {
             Path path = Path.of(filePath);
@@ -34,6 +53,12 @@ public class FileManager {
         }
     }
 
+    /**
+     * Создает файл по пути.
+     *
+     * @param filePath - путь к файлу.
+     * @throws CaesarsCipherException
+     */
     public void createFile(String filePath) {
         try {
             Files.createFile(Path.of(filePath));
@@ -42,6 +67,10 @@ public class FileManager {
         }
     }
 
+    /**
+     * Закрытие потока для чтения.
+     */
+    @Override
     public void close() {
         try {
             if (bufferedReader != null) {

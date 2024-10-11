@@ -3,16 +3,26 @@ package org.example.validation;
 import org.example.alphabet.Alphabet;
 import org.example.ecxeptions.CaesarsCipherException;
 
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 
 public class Validator {
+    /**
+     * Проверяет ключ на соответвию алфавита.
+     * @param key
+     * @param alphabet
+     * @return
+     */
     public boolean isValidKey(int key, Alphabet alphabet) {
         return key >= 0 && key <= alphabet.getSize();
     }
 
+    /**
+     * Проверка файла на возможность чтения из него.
+     * @param filePath - путь к файлу для чтения
+     * @throws CaesarsCipherException
+     */
     public void validateForReading(String filePath) {
         Path path = validatePath(filePath);
         if (isFileExists(path.toString())) {
@@ -22,6 +32,11 @@ public class Validator {
         }
     }
 
+    /**
+     * Возвращает истину, если файл существует и имеет корректный формат txt.
+     * @param filePath - путь до файла.
+     * @throws CaesarsCipherException
+     */
     public boolean isFileExists(String filePath) {
         Path path = validatePath(filePath);
         try {
@@ -37,6 +52,12 @@ public class Validator {
         return false;
     }
 
+    /**
+     * Проверка пути к файлу на валидность.
+     * @param filePath - путь к файлу
+     * @return Path к файлу
+     * @throws CaesarsCipherException
+     */
     private Path validatePath(String filePath) {
         try {
             return Path.of(filePath);

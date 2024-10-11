@@ -4,6 +4,9 @@ import org.example.ecxeptions.CaesarsCipherException;
 import org.example.files.FileManager;
 import org.example.validation.Validator;
 
+/**
+ * Класс для шифрования и дешифрования файла.
+ */
 public class CaesarCoder {
     private final Validator validator;
     private final FileManager fileManager;
@@ -15,9 +18,16 @@ public class CaesarCoder {
         this.cipher = new CaesarCipher();
     }
 
-
+    /**
+     * Метод читает и шифрует файл и записывает результат в другой файл.
+     * Файл для записи не должен быть создан заранее.
+     *
+     * @param fileSrcPath - путь до файла, который необходимо зашифровать.
+     * @param fileDstPath - путь до файла результата шифрования.
+     * @param key         - Ключ шифрования.
+     * @throws CaesarsCipherException
+     */
     public void encrypt(String fileSrcPath, String fileDstPath, int key) {
-        //D:\Java\IDEA\v17\UniverrsityJavaRush\2\wap.txt
         if (!validator.isValidKey(key, cipher.getAlphabet())) {
             throw new CaesarsCipherException("The key is invalid");
         }
@@ -38,8 +48,17 @@ public class CaesarCoder {
         System.out.println("Done!");
     }
 
+    /**
+     * Метод читает и дешифрует файл и записывает результат в другой файл.
+     * Файл для записи не должен быть создан заранее.
+     *
+     * @param fileSrcPath - путь до файла, который необходимо зашифровать.
+     * @param fileDstPath - путь до файла результата шифрования.
+     * @param key         - Ключ шифрования.
+     * @throws CaesarsCipherException
+     */
     public void decrypt(String fileSrcPath, String fileDstPath, int key) {
-        if(!validator.isValidKey(key, cipher.getAlphabet())) {
+        if (!validator.isValidKey(key, cipher.getAlphabet())) {
             throw new CaesarsCipherException("The key is invalid");
         }
         if (!validator.isFileExists(fileSrcPath)) {

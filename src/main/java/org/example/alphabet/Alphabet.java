@@ -4,6 +4,9 @@ import org.example.ecxeptions.CaesarsCipherException;
 
 import java.util.HashMap;
 
+/**
+ * Класс алфавита.
+ */
 public class Alphabet {
     private final char[] alphabet;
     private final HashMap<Character, Integer> alphabetMap;
@@ -22,6 +25,12 @@ public class Alphabet {
                 , 'v', 'w', 'x', 'y', 'z', '-', '…', 'â', '’', '^'});
     }
 
+    /**
+     * Метод создает HashMap на основе массива символов, где ключ - символ, значение - индекс из массива.
+     *
+     * @param alphabet
+     * @return
+     */
     private HashMap<Character, Integer> convertAlphabet(char[] alphabet) {
         HashMap<Character, Integer> result = new HashMap<>();
         for (int i = 0; i < alphabet.length; i++) {
@@ -30,20 +39,37 @@ public class Alphabet {
         return result;
     }
 
-    public int indexOf(char c){
+    /**
+     * Возвращает индекс символа из алфавита.
+     *
+     * @param c - символ
+     * @return
+     */
+    public int indexOf(char c) {
         if (!alphabetMap.containsKey(c)) {
             throw new CaesarsCipherException("Wrong symbol: " + c);
         }
         return alphabetMap.get(c);
     }
 
-    public char charOf(int index){
+    /**
+     * Возвращает символ по индексу из алфавита.
+     *
+     * @param index
+     * @return
+     */
+    public char charOf(int index) {
         if (index < 0 || index > alphabet.length) {
             throw new CaesarsCipherException("Index is invalid.");
         }
         return alphabet[index];
     }
 
+    /**
+     * Возвращает размер алфавита.
+     *
+     * @return
+     */
     public int getSize() {
         return this.alphabet.length;
     }

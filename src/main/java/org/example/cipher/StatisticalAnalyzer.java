@@ -8,8 +8,19 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Класс для дешифрования файла методом статистического анализа.
+ */
 public class StatisticalAnalyzer {
 
+    /**
+     * Поиск возможного ключа для дешифрования.
+     *
+     * @param file     - путь до файла дешифрования.
+     * @param repFile  - путь до файла с репрезентативным текстом.
+     * @param alphabet - алфавит
+     * @return возвращает вероятный ключ.
+     */
     public int findMostLikelyShift(String file, String repFile, Alphabet alphabet) {
         Validator validator = new Validator();
         validator.validateForReading(file);
@@ -25,6 +36,13 @@ public class StatisticalAnalyzer {
         return Math.abs(alphabet.indexOf(maxCharCharacter) - alphabet.indexOf(maxCharRepCharacter));
     }
 
+    /**
+     * Метод возвращает символ из Map со значением maxCharMap.
+     *
+     * @param charMap
+     * @param maxCharMap
+     * @return
+     */
     private Character getMaxCharacter(Map<Character, Integer> charMap, int maxCharMap) {
         Character maxCharCharacter = null;
         for (Map.Entry<Character, Integer> entry : charMap.entrySet()) {
@@ -36,6 +54,12 @@ public class StatisticalAnalyzer {
         return maxCharCharacter;
     }
 
+    /**
+     * Метод создает карту символов со счетчиком повторений из файла.
+     *
+     * @param file - путь до файла.
+     * @return
+     */
     private Map<Character, Integer> getCharacterIntegerMap(String file) {
         FileManager fileManager = new FileManager();
         Map<Character, Integer> charMap = new HashMap<>();

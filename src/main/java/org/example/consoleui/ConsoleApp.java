@@ -8,8 +8,14 @@ import org.example.ecxeptions.CaesarsCipherException;
 
 import java.util.Scanner;
 
+/**
+ * Класс для консольного меню.
+ */
 public class ConsoleApp {
 
+    /**
+     * Составляет и выводит на экран меню из операций.
+     */
     private void showMenu() {
         System.out.println("-".repeat(100));
         for (Operation o : Operation.values()) {
@@ -19,12 +25,20 @@ public class ConsoleApp {
         System.out.print("Выберите способ: ");
     }
 
+    /**
+     * Запуск выполнения и отображения консольного меню.
+     */
     public void start() {
         showMenu();
         Operation operation = getOperation();
         processOperation(operation);
     }
 
+    /**
+     * Вызов методов на основе передаваемой операции.
+     *
+     * @param operation - операция на основе которой необъодимо выполнить действие по шифровнанию/дешифрованию.
+     */
     private void processOperation(Operation operation) {
         switch (operation) {
             case EXIT -> processExit();
@@ -35,6 +49,9 @@ public class ConsoleApp {
         }
     }
 
+    /**
+     * Метод запускает взаимодействие с пользователем, при выборе статистического анализа.
+     */
     private void processStatisticAnalise() {
         boolean isAgain = false;
         while (!isAgain) {
@@ -52,15 +69,14 @@ public class ConsoleApp {
                 new CaesarCoder().decrypt(fileSrcPath, fileDstPath, key);
             } catch (CaesarsCipherException e) {
                 System.out.println("Произошла ошибка: " + e.getMessage());
-                System.out.println("Чтобы попробовать снова введите \"again\":");
-                String s = scanner.nextLine();
-                if (!s.equalsIgnoreCase("again")) {
-                    isAgain = true;
-                }
+                isAgain = isTryAgain(scanner);
             }
         }
     }
 
+    /**
+     * Метод запускает взаимодействие с пользователем, при выборе расшифровки методом Цезаря.
+     */
     private void processDecrypt() {
         boolean isAgain = false;
         while (!isAgain) {
@@ -77,15 +93,14 @@ public class ConsoleApp {
                 new CaesarCoder().decrypt(fileSrcPath, fileDstPath, key);
             } catch (CaesarsCipherException | NumberFormatException e) {
                 System.out.println("Произошла ошибка: " + e.getMessage());
-                System.out.println("Чтобы попробовать снова введите \"again\":");
-                String s = scanner.nextLine();
-                if (!s.equalsIgnoreCase("again")) {
-                    isAgain = true;
-                }
+                isAgain = isTryAgain(scanner);
             }
         }
     }
 
+    /**
+     * Метод запускает взаимодействие с пользователем, при выборе расшифровки методом брутфорса.
+     */
     private void processBruteForce() {
         boolean isAgain = false;
         while (!isAgain) {
@@ -102,15 +117,14 @@ public class ConsoleApp {
                 new BruteForce().decrypt(fileSrcPath, fileDstPath, representativeText);
             } catch (CaesarsCipherException e) {
                 System.out.println("Произошла ошибка: " + e.getMessage());
-                System.out.println("Чтобы попробовать снова введите \"again\":");
-                String s = scanner.nextLine();
-                if (!s.equalsIgnoreCase("again")) {
-                    isAgain = true;
-                }
+                isAgain = isTryAgain(scanner);
             }
         }
     }
 
+    /**
+     * Метод запускает взаимодействие с пользователем, при выборе шифрования методом Цезаря.
+     */
     private void processEncrypt() {
         boolean isAgain = false;
         while (!isAgain) {
@@ -127,20 +141,25 @@ public class ConsoleApp {
                 new CaesarCoder().encrypt(fileSrcPath, fileDstPath, key);
             } catch (CaesarsCipherException | NumberFormatException e) {
                 System.out.println("Произошла ошибка: " + e.getMessage());
-                System.out.println("Чтобы попробовать снова введите \"again\". Чтобы завершить введите любой символ.");
-                String s = scanner.nextLine();
-                if (!s.equalsIgnoreCase("again")) {
-                    isAgain = true;
-                }
+                isAgain = isTryAgain(scanner);
             }
         }
 
     }
 
+    /**
+     * Метод запускает взаимодействие с пользователем, при выборе выхода из приложения.
+     */
     private void processExit() {
         System.out.println("Завершение работы.");
     }
 
+    /**
+     * Получить операцию по номеру. Если номер введен некорректно повторяет взяимодействие с пользователем, если
+     * введено не again возвращает операцию EXIT.
+     *
+     * @return возвращает операцию в зависимости от введенного пользователем значения.
+     */
     private Operation getOperation() {
         boolean isAgain = false;
         do {
@@ -163,5 +182,23 @@ public class ConsoleApp {
         } while (isAgain);
 
         return Operation.EXIT;
+    }
+
+    /**
+     * Метод возвращет истину или ложь, если было введено again.
+     *
+     * @param scanner - объект сканера для ввода данных.
+     * @return true если введено again, иначе false.
+     */
+    private boolean isTryAgain(Scanner scanner) {
+        System.out.println("Чтобы попробовать снова введите \"again\":");
+        if (scanner == null) {
+            scanner = new Scanner(System.in);
+        }
+        String s = scanner.nextLine();
+        if (!s.equalsIgnoreCase("again")) {
+            return true;
+        }
+        return false;
     }
 }
