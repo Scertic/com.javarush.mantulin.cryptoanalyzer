@@ -7,7 +7,6 @@ import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.ParameterException;
 import picocli.CommandLine.Spec;
-import java.util.Locale;
 import java.io.File;
 
 @Command(name = "cypher", subcommands =
