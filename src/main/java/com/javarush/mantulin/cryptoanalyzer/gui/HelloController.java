@@ -1,14 +1,14 @@
-package org.example.gui;
+package com.javarush.mantulin.cryptoanalyzer.gui;
 
+import com.javarush.mantulin.cryptoanalyzer.cipher.BruteForce;
+import com.javarush.mantulin.cryptoanalyzer.cipher.CaesarCoder;
+import com.javarush.mantulin.cryptoanalyzer.cipher.StatisticalAnalyzer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import org.example.alphabet.Alphabet;
-import org.example.cipher.BruteForce;
-import org.example.cipher.CaesarCoder;
-import org.example.cipher.StatisticalAnalyzer;
+import com.javarush.mantulin.cryptoanalyzer.alphabet.Alphabet;
 
 public class HelloController {
 
@@ -83,7 +83,7 @@ public class HelloController {
                 case 3: {
                     try {
                         int key = new StatisticalAnalyzer().findMostLikelyShift(srcFile, rFile, new Alphabet());
-                        new CaesarCoder().decrypt(srcFile, dstFile, key);
+                        new CaesarCoder().encrypt(srcFile, dstFile, key);
                     } catch (Exception e) {
                         Alert alarm = new Alert(Alert.AlertType.ERROR, e.getMessage());
                         alarm.show();

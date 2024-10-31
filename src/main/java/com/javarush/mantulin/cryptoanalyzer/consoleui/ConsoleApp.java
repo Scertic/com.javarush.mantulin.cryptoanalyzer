@@ -1,10 +1,10 @@
-package org.example.consoleui;
+package com.javarush.mantulin.cryptoanalyzer.consoleui;
 
-import org.example.alphabet.Alphabet;
-import org.example.cipher.BruteForce;
-import org.example.cipher.CaesarCoder;
-import org.example.cipher.StatisticalAnalyzer;
-import org.example.ecxeptions.CaesarsCipherException;
+import com.javarush.mantulin.cryptoanalyzer.alphabet.Alphabet;
+import com.javarush.mantulin.cryptoanalyzer.cipher.BruteForce;
+import com.javarush.mantulin.cryptoanalyzer.cipher.CaesarCoder;
+import com.javarush.mantulin.cryptoanalyzer.cipher.StatisticalAnalyzer;
+import com.javarush.mantulin.cryptoanalyzer.ecxeptions.CaesarsCipherException;
 
 import java.util.Scanner;
 
@@ -53,8 +53,8 @@ public class ConsoleApp {
      * Метод запускает взаимодействие с пользователем, при выборе статистического анализа.
      */
     private void processStatisticAnalise() {
-        boolean isAgain = false;
-        while (!isAgain) {
+        boolean isAgain = true;
+        while (isAgain) {
             Scanner scanner = null;
             try {
                 scanner = new Scanner(System.in);
@@ -66,7 +66,8 @@ public class ConsoleApp {
                 System.out.print("Введите полный путь до файла примера текста: ");
                 String representativeText = scanner.nextLine();
                 int key = new StatisticalAnalyzer().findMostLikelyShift(fileSrcPath, representativeText, new Alphabet());
-                new CaesarCoder().decrypt(fileSrcPath, fileDstPath, key);
+                new CaesarCoder().encrypt(fileSrcPath, fileDstPath, key);
+                isAgain = false;
             } catch (CaesarsCipherException e) {
                 System.out.println("Произошла ошибка: " + e.getMessage());
                 isAgain = isTryAgain(scanner);
@@ -78,8 +79,8 @@ public class ConsoleApp {
      * Метод запускает взаимодействие с пользователем, при выборе расшифровки методом Цезаря.
      */
     private void processDecrypt() {
-        boolean isAgain = false;
-        while (!isAgain) {
+        boolean isAgain = true;
+        while (isAgain) {
             Scanner scanner = null;
             try {
                 scanner = new Scanner(System.in);
@@ -91,6 +92,7 @@ public class ConsoleApp {
                 System.out.print("Введите ключ: ");
                 int key = Integer.parseInt(scanner.nextLine());
                 new CaesarCoder().decrypt(fileSrcPath, fileDstPath, key);
+                isAgain = false;
             } catch (CaesarsCipherException | NumberFormatException e) {
                 System.out.println("Произошла ошибка: " + e.getMessage());
                 isAgain = isTryAgain(scanner);
@@ -102,8 +104,8 @@ public class ConsoleApp {
      * Метод запускает взаимодействие с пользователем, при выборе расшифровки методом брутфорса.
      */
     private void processBruteForce() {
-        boolean isAgain = false;
-        while (!isAgain) {
+        boolean isAgain = true;
+        while (isAgain) {
             Scanner scanner = null;
             try {
                 scanner = new Scanner(System.in);
@@ -115,6 +117,7 @@ public class ConsoleApp {
                 System.out.print("Введите полный путь до файла примера текста: ");
                 String representativeText = scanner.nextLine();
                 new BruteForce().decrypt(fileSrcPath, fileDstPath, representativeText);
+                isAgain = false;
             } catch (CaesarsCipherException e) {
                 System.out.println("Произошла ошибка: " + e.getMessage());
                 isAgain = isTryAgain(scanner);
@@ -126,8 +129,8 @@ public class ConsoleApp {
      * Метод запускает взаимодействие с пользователем, при выборе шифрования методом Цезаря.
      */
     private void processEncrypt() {
-        boolean isAgain = false;
-        while (!isAgain) {
+        boolean isAgain = true;
+        while (isAgain) {
             Scanner scanner = null;
             try {
                 scanner = new Scanner(System.in);
@@ -139,6 +142,7 @@ public class ConsoleApp {
                 System.out.print("Введите ключ: ");
                 int key = Integer.parseInt(scanner.nextLine());
                 new CaesarCoder().encrypt(fileSrcPath, fileDstPath, key);
+                isAgain = false;
             } catch (CaesarsCipherException | NumberFormatException e) {
                 System.out.println("Произошла ошибка: " + e.getMessage());
                 isAgain = isTryAgain(scanner);
@@ -197,8 +201,8 @@ public class ConsoleApp {
         }
         String s = scanner.nextLine();
         if (!s.equalsIgnoreCase("again")) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 }

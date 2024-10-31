@@ -1,6 +1,6 @@
-package org.example.files;
+package com.javarush.mantulin.cryptoanalyzer.files;
 
-import org.example.ecxeptions.CaesarsCipherException;
+import com.javarush.mantulin.cryptoanalyzer.ecxeptions.CaesarsCipherException;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
@@ -14,7 +14,7 @@ import java.nio.file.StandardOpenOption;
  * Класс для работы с файлами. Использует для чтения Files.newBufferedReader, что требует закрытие потока чтения после
  * считывания файла методом close().
  */
-public class FileManager implements Closeable {
+public class FileManager implements AutoCloseable {
     private BufferedReader bufferedReader;
 
     /**
