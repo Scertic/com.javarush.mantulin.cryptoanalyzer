@@ -1,7 +1,7 @@
-package com.javarush.mantulin.cryptoanalyzer.validation;
+package com.javarush.mantulin.cryptoanalyzer.service.validation;
 
-import com.javarush.mantulin.cryptoanalyzer.alphabet.Alphabet;
-import com.javarush.mantulin.cryptoanalyzer.ecxeptions.CaesarsCipherException;
+import com.javarush.mantulin.cryptoanalyzer.entity.Alphabet;
+import com.javarush.mantulin.cryptoanalyzer.entity.ecxeptions.CaesarsCipherException;
 
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;

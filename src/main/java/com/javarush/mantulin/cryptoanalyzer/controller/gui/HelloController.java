@@ -1,14 +1,14 @@
-package com.javarush.mantulin.cryptoanalyzer.gui;
+package com.javarush.mantulin.cryptoanalyzer.controller.gui;
 
-import com.javarush.mantulin.cryptoanalyzer.cipher.BruteForce;
-import com.javarush.mantulin.cryptoanalyzer.cipher.CaesarCoder;
-import com.javarush.mantulin.cryptoanalyzer.cipher.StatisticalAnalyzer;
+import com.javarush.mantulin.cryptoanalyzer.service.cipher.BruteForce;
+import com.javarush.mantulin.cryptoanalyzer.service.cipher.CaesarCoder;
+import com.javarush.mantulin.cryptoanalyzer.service.cipher.StatisticalAnalyzer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import com.javarush.mantulin.cryptoanalyzer.alphabet.Alphabet;
+import com.javarush.mantulin.cryptoanalyzer.entity.Alphabet;
 
 public class HelloController {
 
@@ -44,12 +44,16 @@ public class HelloController {
                     try {
                         key = Integer.parseInt(this.key.getText());
                     } catch (NumberFormatException e) {
-                        this.key.setPromptText("Введите целое число от 0 до " + (new Alphabet().getSize() - 1));
                         this.key.clear();
+                        this.key.setPromptText("Введите целое число от 0 до " + (new Alphabet().getSize() - 1));
                     }
                     try {
                         new CaesarCoder().encrypt(srcFile, dstFile, key);
                     } catch (Exception e) {
+                        if (e.getMessage().equals("The key is invalid")) {
+                            this.key.clear();
+                            this.key.setPromptText("Введите целое число от 0 до " + (new Alphabet().getSize() - 1));
+                        }
                         Alert alarm = new Alert(Alert.AlertType.ERROR, e.getMessage());
                         alarm.show();
                     }
@@ -60,12 +64,16 @@ public class HelloController {
                     try {
                         key = Integer.parseInt(this.key.getText());
                     } catch (NumberFormatException e) {
-                        this.key.setPromptText("Введите целое число от 0 до " + (new Alphabet().getSize() - 1));
                         this.key.clear();
+                        this.key.setPromptText("Введите целое число от 0 до " + (new Alphabet().getSize() - 1));
                     }
                     try {
                         new CaesarCoder().decrypt(srcFile, dstFile, key);
                     } catch (Exception e) {
+                        if (e.getMessage().equals("The key is invalid")) {
+                            this.key.clear();
+                            this.key.setPromptText("Введите целое число от 0 до " + (new Alphabet().getSize() - 1));
+                        }
                         Alert alarm = new Alert(Alert.AlertType.ERROR, e.getMessage());
                         alarm.show();
                     }

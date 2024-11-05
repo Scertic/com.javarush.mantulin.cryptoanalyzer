@@ -1,6 +1,6 @@
-package com.javarush.mantulin.cryptoanalyzer.alphabet;
+package com.javarush.mantulin.cryptoanalyzer.entity;
 
-import com.javarush.mantulin.cryptoanalyzer.ecxeptions.CaesarsCipherException;
+import com.javarush.mantulin.cryptoanalyzer.entity.ecxeptions.CaesarsCipherException;
 
 import java.util.HashMap;
 

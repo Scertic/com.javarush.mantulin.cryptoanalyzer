@@ -1,8 +1,8 @@
 package com.javarush.mantulin.cryptoanalyzer;
 
 
-import com.javarush.mantulin.cryptoanalyzer.consoleui.ConsoleApp;
-import com.javarush.mantulin.cryptoanalyzer.ecxeptions.CaesarsCipherException;
+import com.javarush.mantulin.cryptoanalyzer.controller.consoleui.ConsoleApp;
+import com.javarush.mantulin.cryptoanalyzer.entity.ecxeptions.CaesarsCipherException;
 
 import java.util.Scanner;
 

@@ -1,8 +1,8 @@
-package com.javarush.mantulin.cryptoanalyzer.cipher;
+package com.javarush.mantulin.cryptoanalyzer.service.cipher;
 
-import com.javarush.mantulin.cryptoanalyzer.alphabet.Alphabet;
-import com.javarush.mantulin.cryptoanalyzer.files.FileManager;
-import com.javarush.mantulin.cryptoanalyzer.validation.Validator;
+import com.javarush.mantulin.cryptoanalyzer.entity.Alphabet;
+import com.javarush.mantulin.cryptoanalyzer.service.files.FileManager;
+import com.javarush.mantulin.cryptoanalyzer.service.validation.Validator;
 
 import java.util.Collections;
 import java.util.HashMap;

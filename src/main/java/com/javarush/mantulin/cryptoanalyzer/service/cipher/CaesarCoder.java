@@ -1,8 +1,8 @@
-package com.javarush.mantulin.cryptoanalyzer.cipher;
+package com.javarush.mantulin.cryptoanalyzer.service.cipher;
 
-import com.javarush.mantulin.cryptoanalyzer.ecxeptions.CaesarsCipherException;
-import com.javarush.mantulin.cryptoanalyzer.files.FileManager;
-import com.javarush.mantulin.cryptoanalyzer.validation.Validator;
+import com.javarush.mantulin.cryptoanalyzer.entity.ecxeptions.CaesarsCipherException;
+import com.javarush.mantulin.cryptoanalyzer.service.files.FileManager;
+import com.javarush.mantulin.cryptoanalyzer.service.validation.Validator;
 
 /**
  * Класс для шифрования и дешифрования файла.

@@ -1,4 +1,4 @@
-package com.javarush.mantulin.cryptoanalyzer.consoleui;
+package com.javarush.mantulin.cryptoanalyzer.controller.consoleui;
 
 /**
  * enum операций.
