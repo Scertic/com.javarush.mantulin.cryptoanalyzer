@@ -114,7 +114,7 @@ public class ConsoleApp {
                 String fileSrcPath = scanner.nextLine();
                 System.out.print("Введите полный путь до файла результата: ");
                 String fileDstPath = scanner.nextLine();
-                System.out.print("Введите полный путь до файла примера текста: ");
+                System.out.print("Введите полный путь до файла примера текста (или нажмите Enter): ");
                 String representativeText = scanner.nextLine();
                 new BruteForce().decrypt(fileSrcPath, fileDstPath, representativeText);
                 isAgain = false;
