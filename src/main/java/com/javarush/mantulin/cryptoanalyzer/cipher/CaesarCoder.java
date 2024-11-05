@@ -1,8 +1,8 @@
-package org.example.cipher;
+package com.javarush.mantulin.cryptoanalyzer.cipher;
 
-import org.example.ecxeptions.CaesarsCipherException;
-import org.example.files.FileManager;
-import org.example.validation.Validator;
+import com.javarush.mantulin.cryptoanalyzer.ecxeptions.CaesarsCipherException;
+import com.javarush.mantulin.cryptoanalyzer.files.FileManager;
+import com.javarush.mantulin.cryptoanalyzer.validation.Validator;
 
 /**
  * Класс для шифрования и дешифрования файла.

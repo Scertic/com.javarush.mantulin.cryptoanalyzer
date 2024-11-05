@@ -1,7 +1,7 @@
-package org.example.validation;
+package com.javarush.mantulin.cryptoanalyzer.validation;
 
-import org.example.alphabet.Alphabet;
-import org.example.ecxeptions.CaesarsCipherException;
+import com.javarush.mantulin.cryptoanalyzer.alphabet.Alphabet;
+import com.javarush.mantulin.cryptoanalyzer.ecxeptions.CaesarsCipherException;
 
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
@@ -15,7 +15,7 @@ public class Validator {
      * @return
      */
     public boolean isValidKey(int key, Alphabet alphabet) {
-        return key >= 0 && key <= alphabet.getSize();
+        return key >= 0 && key < alphabet.getSize();
     }
 
     /**

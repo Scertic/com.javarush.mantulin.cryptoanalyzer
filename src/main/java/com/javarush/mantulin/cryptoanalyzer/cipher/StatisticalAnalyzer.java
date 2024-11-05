@@ -1,8 +1,8 @@
-package org.example.cipher;
+package com.javarush.mantulin.cryptoanalyzer.cipher;
 
-import org.example.alphabet.Alphabet;
-import org.example.files.FileManager;
-import org.example.validation.Validator;
+import com.javarush.mantulin.cryptoanalyzer.alphabet.Alphabet;
+import com.javarush.mantulin.cryptoanalyzer.files.FileManager;
+import com.javarush.mantulin.cryptoanalyzer.validation.Validator;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,18 +22,30 @@ public class StatisticalAnalyzer {
      * @return возвращает вероятный ключ.
      */
     public int findMostLikelyShift(String file, String repFile, Alphabet alphabet) {
+
         Validator validator = new Validator();
         validator.validateForReading(file);
         Map<Character, Integer> charMap = getCharacterIntegerMap(file);
-        Map<Character, Integer> charMapRep = getCharacterIntegerMap(repFile);
-
         int maxCharMap = Collections.max(charMap.values());
-        int maxCharMapRep = Collections.max(charMapRep.values());
-
         Character maxCharCharacter = getMaxCharacter(charMap, maxCharMap);
-        Character maxCharRepCharacter = getMaxCharacter(charMapRep, maxCharMapRep);
 
-        return Math.abs(alphabet.indexOf(maxCharCharacter) - alphabet.indexOf(maxCharRepCharacter));
+        if (repFile.isBlank()) {
+            System.out.println(alphabet.indexOf(maxCharCharacter));
+            System.out.println(alphabet.indexOf(' '));
+
+            return Math.abs(alphabet.indexOf(maxCharCharacter) - alphabet.indexOf(' '));
+        } else {
+            Map<Character, Integer> charMapRep = getCharacterIntegerMap(repFile);
+            int maxCharMapRep = Collections.max(charMapRep.values());
+            Character maxCharRepCharacter = getMaxCharacter(charMapRep, maxCharMapRep);
+            return Math.abs(alphabet.indexOf(maxCharCharacter) - alphabet.indexOf(maxCharRepCharacter));
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new StatisticalAnalyzer().findMostLikelyShift("D:\\Java\\IDEA\\v17\\UniverrsityJavaRush\\2\\3\\gpt_encrypt_19.txt",
+                ""
+        ,new Alphabet()));
     }
 
     /**

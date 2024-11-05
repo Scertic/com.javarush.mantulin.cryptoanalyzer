@@ -1,7 +1,7 @@
-package org.example.cipher;
+package com.javarush.mantulin.cryptoanalyzer.cipher;
 
-import org.example.alphabet.Alphabet;
-import org.example.ecxeptions.CaesarsCipherException;
+import com.javarush.mantulin.cryptoanalyzer.alphabet.Alphabet;
+import com.javarush.mantulin.cryptoanalyzer.ecxeptions.CaesarsCipherException;
 
 /**
  * Класс для шифровки/расшифровки строки методом Цезаря.

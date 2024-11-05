@@ -1,4 +1,4 @@
-package org.example;
+package com.javarush.mantulin.cryptoanalyzer;
 
 import picocli.CommandLine;
 import picocli.CommandLine.Command;

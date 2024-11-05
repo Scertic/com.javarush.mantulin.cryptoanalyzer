@@ -1,10 +1,10 @@
-package org.example.cipher;
+package com.javarush.mantulin.cryptoanalyzer.cipher;
 
 
-import org.example.alphabet.Alphabet;
-import org.example.ecxeptions.CaesarsCipherException;
-import org.example.files.FileManager;
-import org.example.validation.Validator;
+import com.javarush.mantulin.cryptoanalyzer.alphabet.Alphabet;
+import com.javarush.mantulin.cryptoanalyzer.ecxeptions.CaesarsCipherException;
+import com.javarush.mantulin.cryptoanalyzer.files.FileManager;
+import com.javarush.mantulin.cryptoanalyzer.validation.Validator;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -16,7 +16,7 @@ public class BruteForce {
 
     private int key;
     private final Validator validator;
-    private final FileManager fileManager;
+    private FileManager fileManager;
     private final Alphabet alphabet;
     private HashSet<String> setRep;
 
@@ -110,18 +110,33 @@ public class BruteForce {
      * @param representativeText - путь до файла с репрезентативным текстом.
      */
     public void decrypt(String fileSrcPath, String fileDstPath, String representativeText) {
-        validator.validateForReading(representativeText);
         validator.validateForReading(fileSrcPath);
         if (!validator.isFileExists(fileDstPath)) {
-            setSetRep(representativeText);
-            findTheKey(fileSrcPath);
-            fileManager.createFile(fileDstPath);
-            String line = fileManager.readLineFromFile(fileSrcPath);
-            while (line != null) {
-                fileManager.appendToFile(decryptByBruteForce(line) + '\n', fileDstPath);
-                line = fileManager.readLineFromFile(fileSrcPath);
+            if (!representativeText.isBlank()) {
+                validator.validateForReading(representativeText);
+                setSetRep(representativeText);
+                findTheKey(fileSrcPath);
+                fileManager.createFile(fileDstPath);
+                String line = fileManager.readLineFromFile(fileSrcPath);
+                while (line != null) {
+                    fileManager.appendToFile(decryptByBruteForce(line) + '\n', fileDstPath);
+                    line = fileManager.readLineFromFile(fileSrcPath);
+                }
+                fileManager.close();
+            } else {
+                for (int i = 1; i < alphabet.getSize(); i++) {
+                    key = i;
+                    fileManager = new FileManager();
+                    String newFileDstPath = fileDstPath.replace(".txt", "_key_"+key+".txt");
+                    fileManager.createFile(newFileDstPath);
+                    String line = fileManager.readLineFromFile(fileSrcPath);
+                    while (line != null) {
+                        fileManager.appendToFile(decryptByBruteForce(line) + '\n', newFileDstPath);
+                        line = fileManager.readLineFromFile(fileSrcPath);
+                    }
+                    fileManager.close();
+                }
             }
-            fileManager.close();
         }
     }
 

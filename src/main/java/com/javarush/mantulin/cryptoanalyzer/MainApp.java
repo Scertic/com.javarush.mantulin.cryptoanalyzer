@@ -1,8 +1,8 @@
-package org.example;
+package com.javarush.mantulin.cryptoanalyzer;
 
 
-import org.example.consoleui.ConsoleApp;
-import org.example.ecxeptions.CaesarsCipherException;
+import com.javarush.mantulin.cryptoanalyzer.consoleui.ConsoleApp;
+import com.javarush.mantulin.cryptoanalyzer.ecxeptions.CaesarsCipherException;
 
 import java.util.Scanner;
 
