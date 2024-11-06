@@ -25,7 +25,7 @@ public class CaesarCoder {
      * @param fileSrcPath - путь до файла, который необходимо зашифровать.
      * @param fileDstPath - путь до файла результата шифрования.
      * @param key         - Ключ шифрования.
-     * @throws CaesarsCipherException
+     * @throws CaesarsCipherException если проверки неуспешны.
      */
     public void encrypt(String fileSrcPath, String fileDstPath, int key) {
         checkBeforeCrypt(fileSrcPath, fileDstPath, key);
@@ -47,7 +47,7 @@ public class CaesarCoder {
      * @param fileSrcPath - путь до файла, который необходимо зашифровать.
      * @param fileDstPath - путь до файла результата шифрования.
      * @param key         - Ключ шифрования.
-     * @throws CaesarsCipherException
+     * @throws CaesarsCipherException если проверки неуспешны.
      */
     public void decrypt(String fileSrcPath, String fileDstPath, int key) {
         checkBeforeCrypt(fileSrcPath, fileDstPath, key);
@@ -68,7 +68,7 @@ public class CaesarCoder {
      * @param fileSrcPath - путь до файла, который необходимо зашифровать.
      * @param fileDstPath - путь до файла результата шифрования.
      * @param key         - Ключ шифрования.
-     * @throws CaesarsCipherException
+     * @throws CaesarsCipherException если проверки неуспешны.
      */
     private void checkBeforeCrypt(String fileSrcPath, String fileDstPath, int key) {
         if (!validator.isValidKey(key, cipher.getAlphabet())) {

@@ -89,7 +89,7 @@ public class ConsoleApp {
                 String fileSrcPath = scanner.nextLine();
                 System.out.print("Введите полный путь до файла результата: ");
                 String fileDstPath = scanner.nextLine();
-                System.out.print("Введите ключ: ");
+                System.out.print("Введите ключ (от 0 до "+getMaxKeyFromAlphabet(new Alphabet())+") : ");
                 int key = Integer.parseInt(scanner.nextLine());
                 new CaesarCoder().decrypt(fileSrcPath, fileDstPath, key);
                 isAgain = false;
@@ -139,7 +139,7 @@ public class ConsoleApp {
                 String fileSrcPath = scanner.nextLine();
                 System.out.print("Введите полный путь до файла результата: ");
                 String fileDstPath = scanner.nextLine();
-                System.out.print("Введите ключ: ");
+                System.out.print("Введите ключ (от 0 до "+getMaxKeyFromAlphabet(new Alphabet())+") : ");
                 int key = Integer.parseInt(scanner.nextLine());
                 new CaesarCoder().encrypt(fileSrcPath, fileDstPath, key);
                 isAgain = false;
@@ -200,9 +200,10 @@ public class ConsoleApp {
             scanner = new Scanner(System.in);
         }
         String s = scanner.nextLine();
-        if (!s.equalsIgnoreCase("again")) {
-            return false;
-        }
-        return true;
+        return s.equalsIgnoreCase("again");
+    }
+
+    private int getMaxKeyFromAlphabet(Alphabet alphabet) {
+        return alphabet.getSize()-1;
     }
 }

@@ -6,7 +6,6 @@ import com.javarush.mantulin.cryptoanalyzer.service.cipher.StatisticalAnalyzer;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import com.javarush.mantulin.cryptoanalyzer.service.Alphabet;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -21,9 +20,6 @@ public class HelloController {
     private TextField dstFile;
 
     @FXML
-    private Button fileButton;
-
-    @FXML
     private TextField key;
 
     @FXML
@@ -36,7 +32,7 @@ public class HelloController {
     private TextField srcFile;
 
     @FXML
-    void onMouseFileButtonClicked(MouseEvent event) {
+    void onMouseFileButtonClicked() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         fileChooser.getExtensionFilters().addAll(
@@ -52,7 +48,7 @@ public class HelloController {
     }
 
     @FXML
-    void onMouseFileRepButtonClicked(MouseEvent event) {
+    void onMouseFileRepButtonClicked() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         fileChooser.getExtensionFilters().addAll(
@@ -129,7 +125,6 @@ public class HelloController {
                     } catch (Exception e) {
                         Alert alarm = new Alert(Alert.AlertType.ERROR, e.getMessage());
                         alarm.show();
-                        e.printStackTrace();
                     }
                     break;
                 }

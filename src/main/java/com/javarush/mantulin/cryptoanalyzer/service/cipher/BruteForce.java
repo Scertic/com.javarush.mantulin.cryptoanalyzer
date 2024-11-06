@@ -87,7 +87,6 @@ public class BruteForce {
      * Метод расшифровки строки текста.
      *
      * @param encryptedText - строка текста для расшифровки.
-     * @return
      */
     private String decryptByBruteForce(String encryptedText) {
         try {
