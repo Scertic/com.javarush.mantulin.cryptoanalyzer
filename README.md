@@ -21,4 +21,4 @@ CaesarsCipher представляет собой программу для ши
 ## Установка
 Два способа:
 - Склонировать репозиторий и собрать проект в своей IDE
-- Скачать CaesarsCipher.jar (https://github.com/Scertic/CaesarsCipher/blob/master/target/CaesarsCipher.jar) и запустить его как jar файл в консоли. Проект собран под Java 17.
+- Скачать CaesarsCipher.jar (https://github.com/Scertic/com.javarush.mantulin.cryptoanalyzer/blob/master/target/cryptoanalyzer-1.0-SNAPSHOT.jar) и запустить его как jar файл в консоли. Проект собран под Java 17.
