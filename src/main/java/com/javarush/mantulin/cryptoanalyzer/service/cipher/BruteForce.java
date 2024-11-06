@@ -1,8 +1,8 @@
 package com.javarush.mantulin.cryptoanalyzer.service.cipher;
 
 
-import com.javarush.mantulin.cryptoanalyzer.entity.Alphabet;
-import com.javarush.mantulin.cryptoanalyzer.entity.ecxeptions.CaesarsCipherException;
+import com.javarush.mantulin.cryptoanalyzer.service.Alphabet;
+import com.javarush.mantulin.cryptoanalyzer.ecxeption.CaesarsCipherException;
 import com.javarush.mantulin.cryptoanalyzer.service.files.FileManager;
 import com.javarush.mantulin.cryptoanalyzer.service.validation.Validator;
 
@@ -141,9 +141,9 @@ public class BruteForce {
     }
 
     /**
-     * Возвращает объект алфавита.
+     * Возвращает символ в нижнем регистре.
      *
-     * @return возвращает алфавит.
+     * @return символ в нижнем регистре.
      */
     private char toLowerCase(char ch) {
         return (ch + "").toLowerCase().charAt(0);

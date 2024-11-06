@@ -1,6 +1,6 @@
 package com.javarush.mantulin.cryptoanalyzer.service.files;
 
-import com.javarush.mantulin.cryptoanalyzer.entity.ecxeptions.CaesarsCipherException;
+import com.javarush.mantulin.cryptoanalyzer.ecxeption.CaesarsCipherException;
 
 import java.io.BufferedReader;
 import java.io.IOException;

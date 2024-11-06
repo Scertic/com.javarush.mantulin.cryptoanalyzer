@@ -1,6 +1,6 @@
 package com.javarush.mantulin.cryptoanalyzer.service.cipher;
 
-import com.javarush.mantulin.cryptoanalyzer.entity.ecxeptions.CaesarsCipherException;
+import com.javarush.mantulin.cryptoanalyzer.ecxeption.CaesarsCipherException;
 import com.javarush.mantulin.cryptoanalyzer.service.files.FileManager;
 import com.javarush.mantulin.cryptoanalyzer.service.validation.Validator;
 
@@ -28,15 +28,7 @@ public class CaesarCoder {
      * @throws CaesarsCipherException
      */
     public void encrypt(String fileSrcPath, String fileDstPath, int key) {
-        if (!validator.isValidKey(key, cipher.getAlphabet())) {
-            throw new CaesarsCipherException("The key is invalid");
-        }
-        if (!validator.isFileExists(fileSrcPath)) {
-            throw new CaesarsCipherException("The file " + fileSrcPath + " does not exist.");
-        }
-        if (validator.isFileExists(fileDstPath)) {
-            throw new CaesarsCipherException("The file " + fileDstPath + " already exists.");
-        }
+        checkBeforeCrypt(fileSrcPath, fileDstPath, key);
         fileManager.createFile(fileDstPath);
         validator.validateForReading(fileSrcPath);
         String line = fileManager.readLineFromFile(fileSrcPath);
@@ -58,15 +50,7 @@ public class CaesarCoder {
      * @throws CaesarsCipherException
      */
     public void decrypt(String fileSrcPath, String fileDstPath, int key) {
-        if (!validator.isValidKey(key, cipher.getAlphabet())) {
-            throw new CaesarsCipherException("The key is invalid");
-        }
-        if (!validator.isFileExists(fileSrcPath)) {
-            throw new CaesarsCipherException("The file " + fileSrcPath + " does not exist.");
-        }
-        if (validator.isFileExists(fileDstPath)) {
-            throw new CaesarsCipherException("The file " + fileDstPath + " already exists.");
-        }
+        checkBeforeCrypt(fileSrcPath, fileDstPath, key);
         fileManager.createFile(fileDstPath);
         validator.validateForReading(fileSrcPath);
         String line = fileManager.readLineFromFile(fileSrcPath);
@@ -77,6 +61,25 @@ public class CaesarCoder {
         }
         fileManager.close();
         System.out.println("Done!");
+    }
+
+    /**
+     * Метод проверки валидности ключа и файлов.
+     * @param fileSrcPath - путь до файла, который необходимо зашифровать.
+     * @param fileDstPath - путь до файла результата шифрования.
+     * @param key         - Ключ шифрования.
+     * @throws CaesarsCipherException
+     */
+    private void checkBeforeCrypt(String fileSrcPath, String fileDstPath, int key) {
+        if (!validator.isValidKey(key, cipher.getAlphabet())) {
+            throw new CaesarsCipherException("The key is invalid. The key must be between 0 and " + (cipher.getAlphabet().getSize()-1));
+        }
+        if (!validator.isFileExists(fileSrcPath)) {
+            throw new CaesarsCipherException("The file \"" + fileSrcPath + "\" does not exist.");
+        }
+        if (validator.isFileExists(fileDstPath)) {
+            throw new CaesarsCipherException("The file \"" + fileDstPath + "\" already exists.");
+        }
     }
 
 }
