@@ -4,11 +4,13 @@ import com.javarush.mantulin.cryptoanalyzer.service.cipher.BruteForce;
 import com.javarush.mantulin.cryptoanalyzer.service.cipher.CaesarCoder;
 import com.javarush.mantulin.cryptoanalyzer.service.cipher.StatisticalAnalyzer;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
-import com.javarush.mantulin.cryptoanalyzer.entity.Alphabet;
+import javafx.scene.control.*;
+import com.javarush.mantulin.cryptoanalyzer.service.Alphabet;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+
+import java.io.File;
+import java.nio.file.Path;
 
 public class HelloController {
 
@@ -17,6 +19,12 @@ public class HelloController {
 
     @FXML
     private TextField dstFile;
+
+    @FXML
+    private Button fileButton;
+
+    @FXML
+    private TextField key;
 
     @FXML
     private ComboBox<?> process;
@@ -28,7 +36,33 @@ public class HelloController {
     private TextField srcFile;
 
     @FXML
-    private TextField key;
+    void onMouseFileButtonClicked(MouseEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+        File file = fileChooser.showOpenDialog(this.key.getScene().getWindow());
+        if (file != null) {
+            Path path = file.getAbsoluteFile().toPath();
+            srcFile.setText(path.toString());
+            if (dstFile.getText().isBlank()) {
+                dstFile.setText(path.getParent() + File.separator + "CRYPTO_" + path.getFileName());
+            }
+        }
+    }
+
+    @FXML
+    void onMouseFileRepButtonClicked(MouseEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+        File file = fileChooser.showOpenDialog(this.key.getScene().getWindow());
+        if (file != null) {
+            Path path = file.getAbsoluteFile().toPath();
+            rFile.setText(path.toString());
+        }
+    }
 
 
     @FXML
@@ -95,8 +129,13 @@ public class HelloController {
                     } catch (Exception e) {
                         Alert alarm = new Alert(Alert.AlertType.ERROR, e.getMessage());
                         alarm.show();
+                        e.printStackTrace();
                     }
                     break;
+                }
+                default: {
+                    Alert alarm = new Alert(Alert.AlertType.INFORMATION, "Выберите способ!");
+                    alarm.show();
                 }
             }
 

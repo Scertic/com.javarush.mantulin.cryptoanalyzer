@@ -1,12 +1,13 @@
 package com.javarush.mantulin.cryptoanalyzer.service.cipher;
 
-import com.javarush.mantulin.cryptoanalyzer.entity.Alphabet;
+import com.javarush.mantulin.cryptoanalyzer.service.Alphabet;
 import com.javarush.mantulin.cryptoanalyzer.service.files.FileManager;
 import com.javarush.mantulin.cryptoanalyzer.service.validation.Validator;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 /**
  * Класс для дешифрования файла методом статистического анализа.
@@ -14,7 +15,7 @@ import java.util.Map;
 public class StatisticalAnalyzer {
 
     /**
-     * Поиск возможного ключа для дешифрования.
+     * Поиск возможного ключа для дешифрования. При отсутствии репрезентативного текста используется символ пробела.
      *
      * @param file     - путь до файла дешифрования.
      * @param repFile  - путь до файла с репрезентативным текстом.
@@ -26,7 +27,12 @@ public class StatisticalAnalyzer {
         Validator validator = new Validator();
         validator.validateForReading(file);
         Map<Character, Integer> charMap = getCharacterIntegerMap(file);
-        int maxCharMap = Collections.max(charMap.values());
+        int maxCharMap = 0;
+        try {
+            maxCharMap = Collections.max(charMap.values());
+        } catch (NoSuchElementException e) {
+            return 0;
+        }
         Character maxCharCharacter = getMaxCharacter(charMap, maxCharMap);
 
         if (repFile.isBlank()) {
@@ -40,12 +46,6 @@ public class StatisticalAnalyzer {
             Character maxCharRepCharacter = getMaxCharacter(charMapRep, maxCharMapRep);
             return Math.abs(alphabet.indexOf(maxCharCharacter) - alphabet.indexOf(maxCharRepCharacter));
         }
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new StatisticalAnalyzer().findMostLikelyShift("D:\\Java\\IDEA\\v17\\UniverrsityJavaRush\\2\\3\\gpt_encrypt_19.txt",
-                ""
-        ,new Alphabet()));
     }
 
     /**
@@ -75,12 +75,12 @@ public class StatisticalAnalyzer {
     private Map<Character, Integer> getCharacterIntegerMap(String file) {
         FileManager fileManager = new FileManager();
         Map<Character, Integer> charMap = new HashMap<>();
-        String line = fileManager.readLineFromFile(file);
+        String line = null;
         for (int i = 0; i < 100; i++) {
+            line = fileManager.readLineFromFile(file);
             if (line == null) {
                 break;
             }
-            line = fileManager.readLineFromFile(file);
             for (int j = 0; j < line.length(); j++) {
                 Character ch = line.charAt(j);
                 if (charMap.containsKey((ch + "").toLowerCase().charAt(0))) {

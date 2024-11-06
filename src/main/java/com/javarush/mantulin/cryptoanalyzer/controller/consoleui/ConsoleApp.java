@@ -1,10 +1,10 @@
 package com.javarush.mantulin.cryptoanalyzer.controller.consoleui;
 
-import com.javarush.mantulin.cryptoanalyzer.entity.Alphabet;
+import com.javarush.mantulin.cryptoanalyzer.service.Alphabet;
 import com.javarush.mantulin.cryptoanalyzer.service.cipher.BruteForce;
 import com.javarush.mantulin.cryptoanalyzer.service.cipher.CaesarCoder;
 import com.javarush.mantulin.cryptoanalyzer.service.cipher.StatisticalAnalyzer;
-import com.javarush.mantulin.cryptoanalyzer.entity.ecxeptions.CaesarsCipherException;
+import com.javarush.mantulin.cryptoanalyzer.ecxeption.CaesarsCipherException;
 
 import java.util.Scanner;
 

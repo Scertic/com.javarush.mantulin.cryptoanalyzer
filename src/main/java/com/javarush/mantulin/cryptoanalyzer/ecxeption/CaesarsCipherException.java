@@ -1,4 +1,4 @@
-package com.javarush.mantulin.cryptoanalyzer.entity.ecxeptions;
+package com.javarush.mantulin.cryptoanalyzer.ecxeption;
 
 public class CaesarsCipherException extends RuntimeException{
     String message;
